@@ -2,25 +2,25 @@
 #define MEMORY_H
 #define BYTE char
 
-class memory
+class Memory
 {
 private:
     /* data */
     BYTE ram[4096];
 public:
-    memory();
-    ~memory();
+    Memory();
+    ~Memory();
 
     void setAdress(int adress, BYTE data);
     BYTE getAdress(int adress);
 };
 
-memory::memory(/* args */)
+Memory::Memory(/* args */)
 {
     // leave blank
 }
 
-memory::~memory()
+Memory::~Memory()
 {
     // leave blank
 }
