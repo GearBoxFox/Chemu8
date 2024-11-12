@@ -4,6 +4,7 @@
 CMakeFiles/chemu8.dir/main.cpp.o
  /home/rowanfoxx/Documents/Github/Chemu8/src/main.cpp
  /home/rowanfoxx/Documents/Github/Chemu8/src/memory/memory.hpp
+ /home/rowanfoxx/Documents/Github/Chemu8/src/cpu/cpu.hpp
  /usr/include/SDL2/SDL.h
  /usr/include/SDL2/SDL_assert.h
  /usr/include/SDL2/SDL_atomic.h

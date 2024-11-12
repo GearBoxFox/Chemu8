@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "./memory/memory.hpp"
+#include "./cpu/cpu.hpp"
 
 // You shouldn't really use this statement, but it's fine for small programs
 using namespace std;
@@ -10,7 +10,10 @@ int main(int argc, char** args) {
 	// Memory for the Chemu8 Emulator
 	chipMemory memory;
 
-	cout << memory.getAdress(0x050) << std::endl;
+	int firstNibble = FIRSTNIBBLE(0x10E0);
+	cout << "raw " << (int) 0x10E0 << endl;
+	cout << "should " << (int) 0x1 << endl;
+	cout << "is " << (int) firstNibble << endl;
 	
 	// End the program
 	return 0;

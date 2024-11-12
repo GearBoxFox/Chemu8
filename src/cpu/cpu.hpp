@@ -3,6 +3,12 @@
 
 #include "../memory/memory.hpp"
 
+// macros for extracting nibbles from opcodes
+#define FIRSTNIBBLE(x)  (x & 0xF000) >> 12
+#define SECONDNIBBLE(x) (x & 0x0F00) >> 8
+#define THIRDNIBBLE(x)  (x & 0x00F0) >> 4
+#define FOURTHNIBBLE(x) (x & 0x000F)
+
 class cpu
 {
 private:
@@ -15,6 +21,9 @@ private:
     // 12 bit index and program counter registers
     ADRESS pc;
     ADRESS i;
+
+    // the current opcode
+    ADRESS opcode;
 
     // chip-8 used a 64x32 monocolor display
     BYTE gfx[64 * 32];

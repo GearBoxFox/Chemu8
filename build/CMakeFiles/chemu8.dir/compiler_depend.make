@@ -3,6 +3,7 @@
 
 CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/main.cpp \
   /home/rowanfoxx/Documents/Github/Chemu8/src/memory/memory.hpp \
+  /home/rowanfoxx/Documents/Github/Chemu8/src/cpu/cpu.hpp \
   /usr/include/SDL2/SDL.h \
   /usr/include/SDL2/SDL_assert.h \
   /usr/include/SDL2/SDL_atomic.h \
@@ -536,12 +537,6 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 
 /usr/include/stdc-predef.h:
 
-/usr/include/stdio.h:
-
-/usr/include/bits/wordsize.h:
-
-/usr/include/SDL2/SDL_keycode.h:
-
 /usr/include/bits/wctype-wchar.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/xmmintrin.h:
@@ -676,6 +671,8 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 
 /usr/include/SDL2/SDL_loadso.h:
 
+/home/rowanfoxx/Documents/Github/Chemu8/src/cpu/cpu.hpp:
+
 /usr/include/c++/14/bits/memory_resource.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/gfniintrin.h:
@@ -688,19 +685,7 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 
 /usr/include/SDL2/SDL_joystick.h:
 
-/usr/include/SDL2/SDL_keyboard.h:
-
-/usr/include/SDL2/SDL_clipboard.h:
-
-/usr/include/c++/14/bits/uses_allocator.h:
-
 /usr/include/bits/types.h:
-
-/usr/include/bits/types/struct_timespec.h:
-
-/home/rowanfoxx/Documents/Github/Chemu8/src/main.cpp:
-
-/usr/include/SDL2/SDL_hidapi.h:
 
 /usr/include/bits/types/struct_FILE.h:
 
@@ -744,6 +729,22 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 
 /usr/include/locale.h:
 
+/usr/include/SDL2/SDL_keyboard.h:
+
+/usr/include/pthread.h:
+
+/usr/include/SDL2/SDL_hints.h:
+
+/usr/include/bits/types/struct_timespec.h:
+
+/usr/include/SDL2/SDL_hidapi.h:
+
+/home/rowanfoxx/Documents/Github/Chemu8/src/main.cpp:
+
+/usr/include/c++/14/bits/uses_allocator.h:
+
+/usr/include/SDL2/SDL_clipboard.h:
+
 /usr/include/SDL2/SDL_gamecontroller.h:
 
 /usr/include/bits/atomic_wide_counter.h:
@@ -757,6 +758,10 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 /usr/lib/gcc/x86_64-redhat-linux/14/include/avx512bwintrin.h:
 
 /usr/include/SDL2/SDL_events.h:
+
+/usr/include/SDL2/SDL_mouse.h:
+
+/usr/include/c++/14/ext/atomicity.h:
 
 /usr/include/SDL2/SDL_misc.h:
 
@@ -794,6 +799,16 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 
 /usr/include/c++/14/bits/refwrap.h:
 
+/usr/lib/gcc/x86_64-redhat-linux/14/include/stdarg.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/14/include/cmpccxaddintrin.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/14/bits/stl_algobase.h:
+
+/usr/include/c++/14/bits/stl_iterator.h:
+
 /usr/lib/gcc/x86_64-redhat-linux/14/include/hresetintrin.h:
 
 /usr/include/c++/14/x86_64-redhat-linux/bits/ctype_inline.h:
@@ -806,23 +821,9 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 
 /usr/include/SDL2/SDL_config-x86_64.h:
 
-/usr/include/SDL2/SDL_mouse.h:
-
-/usr/include/c++/14/ext/atomicity.h:
-
-/usr/include/c++/14/cwctype:
-
 /home/rowanfoxx/Documents/Github/Chemu8/src/memory/memory.hpp:
 
-/usr/lib/gcc/x86_64-redhat-linux/14/include/stdarg.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/14/include/cmpccxaddintrin.h:
-
-/usr/include/asm-generic/errno-base.h:
-
-/usr/include/c++/14/bits/stl_algobase.h:
-
-/usr/include/c++/14/bits/stl_iterator.h:
+/usr/include/c++/14/cwctype:
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/avx512cdintrin.h:
 
@@ -859,6 +860,12 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 /usr/include/SDL2/SDL_video.h:
 
 /usr/include/bits/byteswap.h:
+
+/usr/include/SDL2/SDL_keycode.h:
+
+/usr/include/stdio.h:
+
+/usr/include/bits/wordsize.h:
 
 /usr/include/SDL2/SDL_blendmode.h:
 
@@ -985,10 +992,6 @@ CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/Github/Chemu8/src/ma
 /usr/include/c++/14/tr1/legendre_function.tcc:
 
 /usr/include/c++/14/bits/functexcept.h:
-
-/usr/include/SDL2/SDL_hints.h:
-
-/usr/include/pthread.h:
 
 /usr/include/c++/14/bits/istream.tcc:
 
