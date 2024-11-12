@@ -1,4 +1,7 @@
 {
     "cmake.sourceDirectory": "/home/rowanfoxx/Documents/Github/Chemu8/src",
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "iosfwd": "cpp"
+    }
 }

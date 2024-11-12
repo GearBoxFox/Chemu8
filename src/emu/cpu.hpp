@@ -45,7 +45,7 @@ public:
     int executeInstructionLoop();
 
     // loads a program into the memory and starts the execution
-    void loadRomFile();
+    void loadRomFile(std::ifstream* rom);
 };
 
 #endif
