@@ -92,7 +92,7 @@ chemu8_EXTERNAL_OBJECTS =
 
 bin/chemu8: CMakeFiles/chemu8.dir/main.cpp.o
 bin/chemu8: CMakeFiles/chemu8.dir/build.make
-bin/chemu8: memory/libMemory.a
+bin/chemu8: emu/libEmu.a
 bin/chemu8: CMakeFiles/chemu8.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/chemu8"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chemu8.dir/link.txt --verbose=$(VERBOSE)

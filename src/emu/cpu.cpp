@@ -2,6 +2,9 @@
 
 cpu::cpu(/* args */)
 {
+    pc = 0x200;
+    index = 0x0;
+    clearScreen();
 }
 
 cpu::~cpu()
@@ -31,13 +34,7 @@ int cpu::executeInstructionLoop()
     {
     case 0x0:
         // 0x00E0 - clear screen
-        for (int i = 0; i < sizeof(gfx) / sizeof(gfx[0]); i++)
-        {
-            gfx[i] = 0x00;
-        }
-
-        // redraw screen
-        drawFlag = true;
+        clearScreen();
         break;
 
     case 0x1:
@@ -99,6 +96,7 @@ int cpu::executeInstructionLoop()
         break;
 
     case 0xD:
+    {
         // 0xDXYN - draw to screen
         // I register - the index of the sprite to draw
         // N - how many pixels tall the sprite is
@@ -142,10 +140,8 @@ int cpu::executeInstructionLoop()
                 }
             }
         }
-        
-        
         break;
-
+    }
     case 0xE:
         /* code */
         break;
@@ -156,9 +152,20 @@ int cpu::executeInstructionLoop()
 
     default:
         // error, we got a bad opcode
-        std::cout << std::format("Unknown opcode {}", opcode);
+        std::cout << std::format("Unknown opcode {}.", opcode);
         return 1;
     } 
 
     return 0;
+}
+
+void cpu::clearScreen()
+{
+    for (int i = 0; i < sizeof(gfx) / sizeof(gfx[0]); i++)
+        {
+            gfx[i] = 0x00;
+        }
+
+        // redraw screen
+        drawFlag = true;
 }

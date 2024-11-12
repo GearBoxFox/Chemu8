@@ -64,46 +64,46 @@ CMAKE_BINARY_DIR = /home/rowanfoxx/Documents/Github/Chemu8/build
 
 # The main recursive "all" target.
 all: CMakeFiles/chemu8.dir/all
-all: memory/all
+all: emu/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: memory/preinstall
+preinstall: emu/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/chemu8.dir/clean
-clean: memory/clean
+clean: emu/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory memory
+# Directory level rules for directory emu
 
 # Recursive "all" directory target.
-memory/all: memory/CMakeFiles/Memory.dir/all
-.PHONY : memory/all
+emu/all: emu/CMakeFiles/Emu.dir/all
+.PHONY : emu/all
 
 # Recursive "preinstall" directory target.
-memory/preinstall:
-.PHONY : memory/preinstall
+emu/preinstall:
+.PHONY : emu/preinstall
 
 # Recursive "clean" directory target.
-memory/clean: memory/CMakeFiles/Memory.dir/clean
-.PHONY : memory/clean
+emu/clean: emu/CMakeFiles/Emu.dir/clean
+.PHONY : emu/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/chemu8.dir
 
 # All Build rule for target.
-CMakeFiles/chemu8.dir/all: memory/CMakeFiles/Memory.dir/all
+CMakeFiles/chemu8.dir/all: emu/CMakeFiles/Emu.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles --progress-num=3,4 "Built target chemu8"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles --progress-num=4,5 "Built target chemu8"
 .PHONY : CMakeFiles/chemu8.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chemu8.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/chemu8.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 0
 .PHONY : CMakeFiles/chemu8.dir/rule
@@ -118,30 +118,30 @@ CMakeFiles/chemu8.dir/clean:
 .PHONY : CMakeFiles/chemu8.dir/clean
 
 #=============================================================================
-# Target rules for target memory/CMakeFiles/Memory.dir
+# Target rules for target emu/CMakeFiles/Emu.dir
 
 # All Build rule for target.
-memory/CMakeFiles/Memory.dir/all:
-	$(MAKE) $(MAKESILENT) -f memory/CMakeFiles/Memory.dir/build.make memory/CMakeFiles/Memory.dir/depend
-	$(MAKE) $(MAKESILENT) -f memory/CMakeFiles/Memory.dir/build.make memory/CMakeFiles/Memory.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles --progress-num=1,2 "Built target Memory"
-.PHONY : memory/CMakeFiles/Memory.dir/all
+emu/CMakeFiles/Emu.dir/all:
+	$(MAKE) $(MAKESILENT) -f emu/CMakeFiles/Emu.dir/build.make emu/CMakeFiles/Emu.dir/depend
+	$(MAKE) $(MAKESILENT) -f emu/CMakeFiles/Emu.dir/build.make emu/CMakeFiles/Emu.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles --progress-num=1,2,3 "Built target Emu"
+.PHONY : emu/CMakeFiles/Emu.dir/all
 
 # Build rule for subdir invocation for target.
-memory/CMakeFiles/Memory.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 memory/CMakeFiles/Memory.dir/all
+emu/CMakeFiles/Emu.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 emu/CMakeFiles/Emu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 0
-.PHONY : memory/CMakeFiles/Memory.dir/rule
+.PHONY : emu/CMakeFiles/Emu.dir/rule
 
 # Convenience name for target.
-Memory: memory/CMakeFiles/Memory.dir/rule
-.PHONY : Memory
+Emu: emu/CMakeFiles/Emu.dir/rule
+.PHONY : Emu
 
 # clean rule for target.
-memory/CMakeFiles/Memory.dir/clean:
-	$(MAKE) $(MAKESILENT) -f memory/CMakeFiles/Memory.dir/build.make memory/CMakeFiles/Memory.dir/clean
-.PHONY : memory/CMakeFiles/Memory.dir/clean
+emu/CMakeFiles/Emu.dir/clean:
+	$(MAKE) $(MAKESILENT) -f emu/CMakeFiles/Emu.dir/build.make emu/CMakeFiles/Emu.dir/clean
+.PHONY : emu/CMakeFiles/Emu.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

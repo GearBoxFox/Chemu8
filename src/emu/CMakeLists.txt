@@ -1,0 +1,1 @@
+add_library(Emu cpu.hpp cpu.cpp memory.hpp memory.cpp)

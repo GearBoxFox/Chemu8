@@ -1,15 +1,23 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "./cpu/cpu.hpp"
-
-// You shouldn't really use this statement, but it's fine for small programs
-using namespace std;
+#include "./emu/cpu.hpp"
 
 // You must include the command line parameters for your main function to be recognized by SDL
 int main(int argc, char** args) {
-	// Memory for the Chemu8 Emulator
+	// The Chemu8 Emulator
 	cpu chip8;
+
+	while (;;)
+	{
+		int loopSuccess = chip8.executeInstructionLoop();
+
+		if (loopSuccess != 1) {
+			std::cout << "Execution error, panicking";
+			return -1;
+		}
+	}
 	
-	// End the program
+	
+	// End the program, but should never get here
 	return 0;
 }

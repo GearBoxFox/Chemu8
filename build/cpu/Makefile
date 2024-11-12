@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles /home/rowanfoxx/Documents/Github/Chemu8/build//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles /home/rowanfoxx/Documents/Github/Chemu8/build/cpu//CMakeFiles/progress.marks
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,68 +103,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named chemu8
+# Convenience name for target.
+cpu/CMakeFiles/CPU.dir/rule:
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu/CMakeFiles/CPU.dir/rule
+.PHONY : cpu/CMakeFiles/CPU.dir/rule
 
-# Build rule for target.
-chemu8: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 chemu8
-.PHONY : chemu8
-
-# fast build rule for target.
-chemu8/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/build
-.PHONY : chemu8/fast
-
-#=============================================================================
-# Target rules for targets named Emu
-
-# Build rule for target.
-Emu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Emu
-.PHONY : Emu
+# Convenience name for target.
+CPU: cpu/CMakeFiles/CPU.dir/rule
+.PHONY : CPU
 
 # fast build rule for target.
-Emu/fast:
-	$(MAKE) $(MAKESILENT) -f emu/CMakeFiles/Emu.dir/build.make emu/CMakeFiles/Emu.dir/build
-.PHONY : Emu/fast
+CPU/fast:
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f cpu/CMakeFiles/CPU.dir/build.make cpu/CMakeFiles/CPU.dir/build
+.PHONY : CPU/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
+cpu.o: cpu.cpp.o
+.PHONY : cpu.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/main.cpp.o
-.PHONY : main.cpp.o
+cpu.cpp.o:
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f cpu/CMakeFiles/CPU.dir/build.make cpu/CMakeFiles/CPU.dir/cpu.cpp.o
+.PHONY : cpu.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+cpu.i: cpu.cpp.i
+.PHONY : cpu.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/main.cpp.i
-.PHONY : main.cpp.i
+cpu.cpp.i:
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f cpu/CMakeFiles/CPU.dir/build.make cpu/CMakeFiles/CPU.dir/cpu.cpp.i
+.PHONY : cpu.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+cpu.s: cpu.cpp.s
+.PHONY : cpu.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/main.cpp.s
-.PHONY : main.cpp.s
+cpu.cpp.s:
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(MAKE) $(MAKESILENT) -f cpu/CMakeFiles/CPU.dir/build.make cpu/CMakeFiles/CPU.dir/cpu.cpp.s
+.PHONY : cpu.cpp.s
 
 # Help Target
 help:
@@ -174,11 +162,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Emu"
-	@echo "... chemu8"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... CPU"
+	@echo "... cpu.o"
+	@echo "... cpu.i"
+	@echo "... cpu.s"
 .PHONY : help
 
 
@@ -190,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/rowanfoxx/Documents/Github/Chemu8/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

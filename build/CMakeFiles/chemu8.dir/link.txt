@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/chemu8.dir/main.cpp.o -o bin/chemu8  -lSDL2main -lSDL2 memory/libMemory.a
+/usr/bin/c++ -g CMakeFiles/chemu8.dir/main.cpp.o -o bin/chemu8  -lSDL2main -lSDL2 emu/libEmu.a

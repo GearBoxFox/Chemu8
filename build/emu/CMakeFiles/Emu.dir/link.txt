@@ -1,0 +1,2 @@
+/usr/bin/ar qc libEmu.a CMakeFiles/Emu.dir/cpu.cpp.o CMakeFiles/Emu.dir/memory.cpp.o
+/usr/bin/ranlib libEmu.a

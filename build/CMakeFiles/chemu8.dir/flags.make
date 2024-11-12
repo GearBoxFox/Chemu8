@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/rowanfoxx/Documents/Github/Chemu8/build -I/home/rowanfoxx/Documents/Github/Chemu8/src/memory
 
-CXX_FLAGS = -g
+CXX_FLAGS = -g -std=gnu++20
 
