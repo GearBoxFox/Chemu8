@@ -20,7 +20,7 @@ private:
 
     // 12 bit index and program counter registers
     ADRESS pc;
-    ADRESS i;
+    ADRESS index;
 
     // the current opcode
     ADRESS opcode;
