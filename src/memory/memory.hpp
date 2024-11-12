@@ -1,28 +1,22 @@
 #ifndef MEMORY_H
 #define MEMORY_H
-#define BYTE char
+
+#define BYTE unsigned char
+#define ADRESS unsigned short
 
 class Memory
 {
 private:
     /* data */
     BYTE ram[4096];
+
+    void loadFontData();
 public:
     Memory();
     ~Memory();
 
-    void setAdress(int adress, BYTE data);
-    BYTE getAdress(int adress);
+    void setAdress(ADRESS adress, BYTE data);
+    BYTE getAdress(ADRESS adress);
 };
-
-Memory::Memory(/* args */)
-{
-    // leave blank
-}
-
-Memory::~Memory()
-{
-    // leave blank
-}
 
 #endif
