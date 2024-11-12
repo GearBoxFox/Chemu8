@@ -11,9 +11,12 @@ cpu::~cpu()
 {
 }
 
-void cpu::loadRomFile(std::ifstream*)
+void cpu::loadRomFile(char* rom, size_t romSize)
 {
-    
+    for (int i = 0; i < romSize; i++) 
+    {
+        mem.setAdress(0x200 + i, rom[i]);
+    }
 }
 
 int cpu::executeInstructionLoop()

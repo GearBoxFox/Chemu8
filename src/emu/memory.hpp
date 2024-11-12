@@ -1,6 +1,8 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
+#include <iostream>
+
 #define BYTE unsigned char
 #define ADRESS unsigned short
 
