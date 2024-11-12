@@ -27,13 +27,14 @@ private:
 
     // chip-8 used a 64x32 monocolor display
     BYTE gfx[64 * 32];
+    BYTE drawFlag = false;
     
     // two delay timers, both updating at 60 Hz
     BYTE delay_timer;
     BYTE sound_timer;
 
     // runs the basic fetch-decode-execute loop
-    void executeInstructionLoop();
+    int executeInstructionLoop();
 public:
     cpu(/* args */);
     ~cpu();
