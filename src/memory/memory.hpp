@@ -4,7 +4,7 @@
 #define BYTE unsigned char
 #define ADRESS unsigned short
 
-class Memory
+class chipMemory
 {
 private:
     /* data */
@@ -12,8 +12,8 @@ private:
 
     void loadFontData();
 public:
-    Memory();
-    ~Memory();
+    chipMemory();
+    ~chipMemory();
 
     void setAdress(ADRESS adress, BYTE data);
     BYTE getAdress(ADRESS adress);

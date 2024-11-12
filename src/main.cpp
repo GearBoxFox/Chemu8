@@ -8,7 +8,7 @@ using namespace std;
 // You must include the command line parameters for your main function to be recognized by SDL
 int main(int argc, char** args) {
 	// Memory for the Chemu8 Emulator
-	Memory memory;
+	chipMemory memory;
 
 	cout << memory.getAdress(0x050) << std::endl;
 	

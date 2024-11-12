@@ -1,27 +1,27 @@
 #include "memory.hpp"
 
-Memory::Memory(/* args */)
+chipMemory::chipMemory(/* args */)
 {
     loadFontData();
 }
 
-Memory::~Memory()
+chipMemory::~chipMemory()
 {
     // leave blank
 }
 
-void Memory::setAdress(ADRESS adress, BYTE data) 
+void chipMemory::setAdress(ADRESS adress, BYTE data) 
 {
     ram[adress] = data;
 }
 
-BYTE Memory::getAdress(ADRESS adress) 
+BYTE chipMemory::getAdress(ADRESS adress) 
 {
     BYTE data = ram[adress];
     return data;
 }
 
-void Memory::loadFontData()
+void chipMemory::loadFontData()
 {
     // font is stored in memory between adresses 0x050 and 0x09F
     BYTE font[] = 
