@@ -1,6 +1,8 @@
 #ifndef CPU_H
 #define CPU_H
 
+#include <iostream>
+#include <format>
 #include "../memory/memory.hpp"
 
 // macros for extracting nibbles from opcodes

@@ -156,6 +156,7 @@ int cpu::executeInstructionLoop()
 
     default:
         // error, we got a bad opcode
+        std::cout << std::format("Unknown opcode {}", opcode);
         return 1;
     } 
 
