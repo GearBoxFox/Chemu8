@@ -2,14 +2,13 @@
 #define CPU_H
 
 #include <iostream>
-#include <format>
 #include "./memory.hpp"
 
 // macros for extracting nibbles from opcodes
-#define FIRSTNIBBLE(x)  (BYTE)(x & 0xF000) >> 12
-#define SECONDNIBBLE(x) (BYTE)(x & 0x0F00) >> 8
-#define THIRDNIBBLE(x)  (BYTE)(x & 0x00F0) >> 4
-#define FOURTHNIBBLE(x) (BYTE)(x & 0x000F)
+#define FIRSTNIBBLE(x)  (x & 0xF000) >> 12
+#define SECONDNIBBLE(x) (x & 0x0F00) >> 8
+#define THIRDNIBBLE(x)  (x & 0x00F0) >> 4
+#define FOURTHNIBBLE(x) (x & 0x000F)
 
 class cpu
 {
@@ -18,18 +17,18 @@ private:
     chipMemory mem;
 
     // 15 1-byte general purpose registers + 1 carry-bit register
-    BYTE v[16];
+    unsigned char v[16];
 
     // 12 bit index and program counter registers
-    ADRESS pc;
-    ADRESS index;
+    unsigned short pc;
+    unsigned short index;
 
     // the current opcode
-    ADRESS opcode;
+    unsigned char opcode;
     
     // two delay timers, both updating at 60 Hz
-    BYTE delay_timer;
-    BYTE sound_timer;
+    unsigned char delay_timer;
+    unsigned char sound_timer;
 
     // clears the screen
     void clearScreen();
@@ -38,8 +37,8 @@ public:
     ~cpu();
 
     // chip-8 used a 64x32 monocolor display
-    BYTE gfx[64 * 32];
-    BYTE drawFlag = false;
+    unsigned char gfx[64 * 32];
+    bool drawFlag = false;
 
     // runs the basic fetch-decode-execute loop
     int executeInstructionLoop();

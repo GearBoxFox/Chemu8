@@ -10,21 +10,21 @@ chipMemory::~chipMemory()
     // leave blank
 }
 
-void chipMemory::setAdress(ADRESS adress, BYTE data) 
+void chipMemory::setAdress(unsigned short adress, unsigned char data) 
 {
     ram[adress] = data;
 }
 
-BYTE chipMemory::getAdress(ADRESS adress) 
+unsigned char chipMemory::getAdress(unsigned short adress) 
 {
-    BYTE data = ram[adress];
+    unsigned char data = ram[adress];
     return data;
 }
 
 void chipMemory::loadFontData()
 {
     // font is stored in memory between adresses 0x050 and 0x09F
-    BYTE font[] = 
+    unsigned char font[] = 
     {
         0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
         0x20, 0x60, 0x20, 0x20, 0x70, // 1
@@ -44,7 +44,7 @@ void chipMemory::loadFontData()
         0xF0, 0x80, 0xF0, 0x80, 0x80  // F
     };
 
-    for (ADRESS adressIndex = 0; adressIndex < sizeof(font) / sizeof(BYTE); adressIndex++)
+    for (unsigned short adressIndex = 0; adressIndex < sizeof(font) / sizeof(unsigned char); adressIndex++)
     {
         setAdress(0x050 + adressIndex, font[adressIndex]);
     }

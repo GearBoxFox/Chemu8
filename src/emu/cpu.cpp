@@ -23,14 +23,14 @@ int cpu::executeInstructionLoop()
 {
     // fetch step
     // loads the current program counter into the index 
-    // opcodes are 2 bytes long, so we have to bit shift and merge
+    // opcodes are 2 unsigned chars long, so we have to bit shift and merge
     opcode = mem.getAdress(pc) << 8 | mem.getAdress(pc + 1);
 
     // decode + execute
     // chip-8 has fairly a simple execute stage, so we can merge the two steps
 
-    // chip-8 uses half-bytes or "nibbles"
-    BYTE nibbles[4] = 
+    // chip-8 uses half-unsigned chars or "nibbles"
+    int nibbles[4] = 
     {
         FIRSTNIBBLE(opcode),
         SECONDNIBBLE(opcode),
@@ -111,16 +111,16 @@ int cpu::executeInstructionLoop()
         // VX - register that holds the X coord
         // VY - register that holds the Y coord
 
-        BYTE xCoord = v[nibbles[1]] % 64; // modulo 64 because the screen is oly 64 pixel long
-        BYTE yCoord = v[nibbles[2]] % 32; // modulo 32 because the screen is oly 32 pixel tall
+        unsigned char xCoord = v[nibbles[1]] % 64; // modulo 64 because the screen is oly 64 pixel long
+        unsigned char yCoord = v[nibbles[2]] % 32; // modulo 32 because the screen is oly 32 pixel tall
 
-        BYTE spriteHeight = nibbles[3];
+        unsigned char spriteHeight = nibbles[3];
 
         // draw top->bottom
         for (int x = 0; x < spriteHeight; x++)
         {
             // get the row for the sprite
-            BYTE row = mem.getAdress(index + x);
+            unsigned char row = mem.getAdress(index + x);
             // draw left->right, each sprite is 8 bits long
             for(int y = 7; y >= 0; y--)
             {
@@ -137,7 +137,7 @@ int cpu::executeInstructionLoop()
 
                 // the gfx array storing pixels is a 1D array
                 int rawIndex = xIndex + (yIndex * 64);
-                BYTE currentPixel = gfx[rawIndex];
+                unsigned char currentPixel = gfx[rawIndex];
 
                 // the pixels are drawn by xoring 
                 bool overflow = currentPixel ^ pixel;

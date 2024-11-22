@@ -1,6 +1,9 @@
-/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles/chemu8.dir
-/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles/edit_cache.dir
-/home/rowanfoxx/Documents/Github/Chemu8/build/CMakeFiles/rebuild_cache.dir
-/home/rowanfoxx/Documents/Github/Chemu8/build/emu/CMakeFiles/Emu.dir
-/home/rowanfoxx/Documents/Github/Chemu8/build/emu/CMakeFiles/edit_cache.dir
-/home/rowanfoxx/Documents/Github/Chemu8/build/emu/CMakeFiles/rebuild_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/chemu8.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/edit_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/rebuild_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/emu/CMakeFiles/Emu.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/emu/CMakeFiles/edit_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/emu/CMakeFiles/rebuild_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/display/CMakeFiles/Display.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/display/CMakeFiles/edit_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/display/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,113 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-DEBUG-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "emu",
+					"jsonFile" : "directory-emu-DEBUG-db574b75f4a2eba7581a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "emu",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "display",
+					"jsonFile" : "directory-display-DEBUG-6dbe3f200d86692340c0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "display",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "DEBUG",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "chemu8",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "Display::@e649ce710e413ec19d78",
+					"jsonFile" : "target-Display-DEBUG-b18ffa100919f45a3c72.json",
+					"name" : "Display",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Emu::@4cb22d992d82749bc503",
+					"jsonFile" : "target-Emu-DEBUG-311e88eef0fc9754afa9.json",
+					"name" : "Emu",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "chemu8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-chemu8-DEBUG-d5b27c9a7b89a2921c45.json",
+					"name" : "chemu8",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/rowanfoxx/Documents/github/Chemu8/build",
+		"source" : "/home/rowanfoxx/Documents/github/Chemu8/src"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

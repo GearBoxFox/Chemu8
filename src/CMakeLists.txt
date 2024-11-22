@@ -8,10 +8,11 @@ set(EXECUTABLE_OUTPUT_PATH bin)
 set(CMAKE_BUILD_TYPE DEBUG)
 
 add_subdirectory(emu)
+add_subdirectory(display)
 
 add_executable(chemu8 main.cpp)
 
-target_link_libraries(chemu8 SDL2main SDL2 Emu)
+target_link_libraries(chemu8 SDL2main SDL2 Emu Display)
 target_include_directories(chemu8 PUBLIC
                           "${PROJECT_BINARY_DIR}"
                           "${PROJECT_SOURCE_DIR}/memory"
