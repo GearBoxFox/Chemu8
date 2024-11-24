@@ -116,19 +116,23 @@ int cpu::executeInstructionLoop()
         int xCoord = v[nibbles[1]]; // modulo 64 because the screen is oly 64 pixel long
         int yCoord = v[nibbles[2]]; // modulo 32 because the screen is oly 32 pixel tall
 
-        unsigned char spriteHeight = nibbles[3];
+        int spriteHeight = nibbles[3];
         unsigned short pixel;
 
         std::cout << "X, Y: " << 
         std::hex << xCoord <<
         std::dec <<  ", " <<
-        std::hex << yCoord << std::dec << std::endl;
+        std::hex << yCoord << 
+        std::dec << std::endl;
+
+        std::cout << "Sprite height: " << spriteHeight << std::endl;
 
         // draw top->bottom
         for (int y = 0; y < spriteHeight; y++)
         {
             // get the row for the sprite
             unsigned char row = mem.getAdress(index + y);
+            std::cout << "Pixel row: " << row << std::endl;
             // draw left->right, each sprite is 8 bits long
             for(int x = 7; x >= 0; x--)
             {
