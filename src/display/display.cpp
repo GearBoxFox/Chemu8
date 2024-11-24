@@ -36,7 +36,6 @@ void display::drawWindow(bool gfx[64 * 32])
   // set draw color to white
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-  std::cout << "Starting to draw window" << std::endl;
   for (int y = 0; y < 32; y++)
   {
     for (int x = 0; x < 64; x++)
@@ -53,8 +52,6 @@ void display::drawWindow(bool gfx[64 * 32])
       }
     }
   }
-
-  std::cout << "Finished drawing window" << std::endl;
 
   // draw window
   SDL_RenderPresent(renderer);

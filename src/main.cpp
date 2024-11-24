@@ -6,7 +6,6 @@
 
 void runCpuCycle(cpu *chip, display *dis)
 {
-  std::cout << "Running cpu instruction" << std::endl;
   // run CPU clock cycle
   if (chip->executeInstructionLoop() != 0)
   {
@@ -19,8 +18,6 @@ void runCpuCycle(cpu *chip, display *dis)
     chip->drawFlag = false;
     dis->drawWindow(chip->gfx);
   }
-
-  std::cout << "Finished CPU loop" << std::endl;
 }
 
 // You must include the command line parameters for your main function to be
@@ -96,11 +93,14 @@ int main(int argc, char **args) {
           break;
 
         case SDL_KEYDOWN:
-          // test keycodes
-          if (debug)
+          // testkeycode
+          switch (e.key.keysym.sym)
           {
-            // testkeycode
-            switch (e.key.keysym.sym)
+            case SDLK_0:
+              debug = !debug;
+              break;
+
+            if (debug)
             {
               case SDLK_SPACE:
                 std::cout << "Executing loop cycle" << std::endl;
