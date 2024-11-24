@@ -114,6 +114,13 @@ int main(int argc, char **args) {
               std::cout << std::endl;
             }
             
+          case SDLK_b:
+            for (int i = 0; i < 16; i++)
+            {
+              std::cout << "Register " << i << ": " << std::hex << +chip8.v[i] << std::dec << std::endl;
+            }
+
+            std::cout << "Index: " << std::hex << chip8.index << std::dec << std::endl;
         }
 
         break;

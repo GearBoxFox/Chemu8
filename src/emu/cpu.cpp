@@ -78,7 +78,8 @@ int cpu::executeInstructionLoop()
 
     case 0x7:
         // 0x7XNN - add value NN to register VX
-        v[nibbles[1] - 1] = v[nibbles[1] - 1] 
+        std::cout << "Adding " << +(nibbles[2] << 4 | nibbles[3]) << " to register " << +nibbles[1];
+        v[nibbles[1]] = v[nibbles[1]] 
             + (nibbles[2] << 4 | nibbles[3]);
         break;
 

@@ -17,12 +17,8 @@ private:
     // RAM for fonts + program + work
     chipMemory mem;
 
-    // 15 1-byte general purpose registers + 1 carry-bit register
-    unsigned char v[16];
-
     // 12 bit index and program counter registers
     unsigned short pc;
-    unsigned short index;
 
     // the current opcode
     unsigned short opcode;
@@ -40,6 +36,10 @@ public:
     // chip-8 used a 64x32 monocolor display
     bool gfx[64 * 32];
     bool drawFlag = false;
+
+    // 15 1-byte general purpose registers + 1 carry-bit register
+    unsigned char v[16];
+    unsigned short index;
 
     // runs the basic fetch-decode-execute loop
     int executeInstructionLoop();
