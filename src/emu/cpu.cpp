@@ -72,6 +72,7 @@ int cpu::executeInstructionLoop()
 
     case 0x6:
         // 0x6XNN - set register VX to NN
+        std::cout << "Setting variable " << nibbles[1] << " to value " << (nibbles[2] << 4 | nibbles[3]) << std::endl;
         v[nibbles[1] - 1] = nibbles[2] << 4 | nibbles[3];
         break;
 
