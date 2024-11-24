@@ -100,7 +100,7 @@ int main(int argc, char **args) {
             {
               for (int x = 0; x < 64; x++)
               {
-                int rawIndex = x + (y * 32);
+                int rawIndex = x + (y * 64);
                 if (chip8.gfx[rawIndex] != 0)
                 {
                   std::cout << "1";

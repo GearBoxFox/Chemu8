@@ -2,6 +2,7 @@
 #define CPU_H
 
 #include <iostream>
+#include <iomanip>
 #include "./memory.hpp"
 
 // macros for extracting nibbles from opcodes
@@ -24,7 +25,7 @@ private:
     unsigned short index;
 
     // the current opcode
-    unsigned char opcode;
+    unsigned short opcode;
     
     // two delay timers, both updating at 60 Hz
     unsigned char delay_timer;
@@ -37,7 +38,7 @@ public:
     ~cpu();
 
     // chip-8 used a 64x32 monocolor display
-    unsigned char gfx[64 * 32];
+    bool gfx[64 * 32];
     bool drawFlag = false;
 
     // runs the basic fetch-decode-execute loop

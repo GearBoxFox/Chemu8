@@ -26,8 +26,10 @@ int cpu::executeInstructionLoop()
     // opcodes are 2 unsigned chars long, so we have to bit shift and merge
     opcode = mem.getAdress(pc) << 8 | mem.getAdress(pc + 1);
 
+    pc += 2;
     // decode + execute
     // chip-8 has fairly a simple execute stage, so we can merge the two steps
+    std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
 
     // chip-8 uses half-unsigned chars or "nibbles"
     int nibbles[4] = 
@@ -111,43 +113,69 @@ int cpu::executeInstructionLoop()
         // VX - register that holds the X coord
         // VY - register that holds the Y coord
 
-        unsigned char xCoord = v[nibbles[1]] % 64; // modulo 64 because the screen is oly 64 pixel long
-        unsigned char yCoord = v[nibbles[2]] % 32; // modulo 32 because the screen is oly 32 pixel tall
+        int xCoord = v[nibbles[1]]; // modulo 64 because the screen is oly 64 pixel long
+        int yCoord = v[nibbles[2]]; // modulo 32 because the screen is oly 32 pixel tall
 
         unsigned char spriteHeight = nibbles[3];
+        unsigned short pixel;
+
+        std::cout << "X, Y: " << 
+        std::hex << xCoord <<
+        std::dec <<  ", " <<
+        std::hex << yCoord << std::dec << std::endl;
 
         // draw top->bottom
-        for (int x = 0; x < spriteHeight; x++)
+        for (int y = 0; y < spriteHeight; y++)
         {
             // get the row for the sprite
-            unsigned char row = mem.getAdress(index + x);
+            unsigned char row = mem.getAdress(index + y);
             // draw left->right, each sprite is 8 bits long
-            for(int y = 7; y >= 0; y--)
+            for(int x = 7; x >= 0; x--)
             {
                 // mask out the specific pixel
-                bool pixel = row & (0x01 << y);
+                bool pixel = row & (0x01 << x);
 
                 // error if drawing off screen
-                int xIndex = xCoord + (8 - y);
+                int xIndex = xCoord + (8 - x);
                 if (xIndex > 64) break;
 
                 // error if drawing off screen
-                int yIndex = yCoord + x;
+                int yIndex = yCoord + y;
                 if (yIndex > 32) break;
 
                 // the gfx array storing pixels is a 1D array
                 int rawIndex = xIndex + (yIndex * 64);
-                unsigned char currentPixel = gfx[rawIndex];
+                bool currentPixel = gfx[rawIndex];
+
+                std::cout << "Drawing pixel at (" << xIndex << ", " << yIndex << "). Raw: " << rawIndex << std::endl;
+                std::cout << "Current pixel: " << currentPixel << ". New pixel: " << pixel << std::endl;
 
                 // the pixels are drawn by xoring 
                 bool overflow = currentPixel ^ pixel;
                 if (overflow) {
+                    std::cout << "Pixel drawn!" << std::endl;
                     gfx[rawIndex] = !gfx[rawIndex];
                     v[0xF] = 1;
                     drawFlag = true;
                 }
             }
         }
+
+        // v[0xF] = 0;
+        // for (int yline = 0; yline < spriteHeight; yline++)
+        // {
+        //     pixel = mem.getAdress(index + yline);
+        //     for(int xline = 0; xline < 8; xline++)
+        //     {
+        //         if((pixel & (0x80 >> xline)) != 0)
+        //         {
+        //         if(gfx[(x + xline + ((y + yline) * 64))] == 1)
+        //             v[0xF] = 1;                                 
+        //         gfx[x + xline + ((y + yline) * 64)] ^= 1;
+        //         }
+        //     }
+        // }
+
         break;
     }
     case 0xE:
@@ -170,10 +198,11 @@ int cpu::executeInstructionLoop()
 void cpu::clearScreen()
 {
     for (int i = 0; i < sizeof(gfx) / sizeof(gfx[0]); i++)
-        {
-            gfx[i] = 0x00;
-        }
+    {
+        gfx[i] = 0x00;
+    }
 
-        // redraw screen
-        drawFlag = true;
+
+    // redraw screen
+    drawFlag = true;
 }

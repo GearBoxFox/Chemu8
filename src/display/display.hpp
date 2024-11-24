@@ -7,7 +7,7 @@ public:
   display();
   ~display();
 
-  void drawWindow(unsigned char gfx[64 * 32]);
+  void drawWindow(bool gfx[64 * 32]);
 
 private:
   SDL_Window *window;

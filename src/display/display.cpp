@@ -27,7 +27,7 @@ display::display() {
   SDL_RenderClear(renderer);
 }
 
-void display::drawWindow(unsigned char gfx[64 * 32])
+void display::drawWindow(bool gfx[64 * 32])
 {
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   SDL_RenderClear(renderer);
