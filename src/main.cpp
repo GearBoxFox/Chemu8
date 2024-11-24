@@ -4,6 +4,25 @@
 #include <iostream>
 #include <stdio.h>
 
+void runCpuCycle(cpu *chip, display *dis)
+{
+  std::cout << "Running cpu instruction" << std::endl;
+  // run CPU clock cycle
+  if (chip->executeInstructionLoop() != 0)
+  {
+    exit(-1);
+  }
+
+  // draw the screen
+  if (chip->drawFlag)
+  {
+    chip->drawFlag = false;
+    dis->drawWindow(chip->gfx);
+  }
+
+  std::cout << "Finished CPU loop" << std::endl;
+}
+
 // You must include the command line parameters for your main function to be
 // recognized by SDL
 int main(int argc, char **args) {
@@ -17,9 +36,6 @@ int main(int argc, char **args) {
   // the first argument should be the ROM file to load
   if (argc < 2) {
     std::cout << "Missing ROM file to play." << std::endl;
-    return -1;
-  } else if (argc > 2) {
-    std::cout << "Too many arguments." << std::endl;
     return -1;
   } else {
     std::cout << "Starting Emulator" << std::endl;
@@ -64,67 +80,74 @@ int main(int argc, char **args) {
     free(buffer);
   }
 
+  bool debug = (args[2] != NULL);
+  std::cout << debug << std::endl;
+
   while (true) {
     // Event loop
+
+    // debug events
     while (SDL_PollEvent(&e) != 0)
     {
       switch (e.type)
       {
-      case SDL_QUIT:
-        return 0;
-        break;
-
-      case SDL_KEYDOWN:
-        // testkeycode
-        switch (e.key.keysym.sym)
-        {
-          case SDLK_SPACE:
-            std::cout << "Executing loop cycle" << std::endl;
-
-            // run CPU clock cycle
-            if (chip8.executeInstructionLoop() != 0)
-            {
-              return -1;
-            }
-
-            // draw the screen
-            if (chip8.drawFlag)
-            {
-              display.drawWindow(chip8.gfx);
-            }
+        case SDL_QUIT:
+          return 0;
           break;
 
-          case SDLK_g:
-            // print graphics memory for debugging
-            for (int y = 0; y < 32; y++)
+        case SDL_KEYDOWN:
+          // test keycodes
+          if (debug)
+          {
+            // testkeycode
+            switch (e.key.keysym.sym)
             {
-              for (int x = 0; x < 64; x++)
-              {
-                int rawIndex = x + (y * 64);
-                if (chip8.gfx[rawIndex] != 0)
+              case SDLK_SPACE:
+                std::cout << "Executing loop cycle" << std::endl;
+
+                runCpuCycle(&chip8, &display);
+              break;
+
+              case SDLK_g:
+                // print graphics memory for debugging
+                for (int y = 0; y < 32; y++)
                 {
-                  std::cout << "1";
-                } else {
-                  std::cout << "0";
+                  for (int x = 0; x < 64; x++)
+                  {
+                    int rawIndex = x + (y * 64);
+                    if (chip8.gfx[rawIndex] != 0)
+                    {
+                      std::cout << "1";
+                    } else {
+                      std::cout << "0";
+                    }
+
+                    std::cout << " ";
+                  }
+                  
+                  std::cout << std::endl;
                 }
 
-                std::cout << " ";
-              }
-              
-              std::cout << std::endl;
-            }
-            
-          case SDLK_b:
-            for (int i = 0; i < 16; i++)
-            {
-              std::cout << "Register " << i << ": " << std::hex << +chip8.v[i] << std::dec << std::endl;
-            }
+                break;
+                
+              case SDLK_b:
+                for (int i = 0; i < 16; i++)
+                {
+                  std::cout << "Register " << i << ": " << std::hex << +chip8.v[i] << std::dec << std::endl;
+                }
 
-            std::cout << "Index: " << std::hex << chip8.index << std::dec << std::endl;
-        }
+                std::cout << "Index: " << std::hex << chip8.index << std::dec << std::endl;
+                break;
+            }
+          }
 
-        break;
+          break;
       }
+    }
+
+    if (!debug)
+    {
+      runCpuCycle(&chip8, &display);
     }
   }
 

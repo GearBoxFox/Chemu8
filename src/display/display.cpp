@@ -11,7 +11,7 @@ display::display() {
 
   window =
       SDL_CreateWindow("Chemu8", SDL_WINDOWPOS_UNDEFINED,
-                       SDL_WINDOWPOS_UNDEFINED, 64, 32, SDL_WINDOW_SHOWN);
+                       SDL_WINDOWPOS_UNDEFINED, 64 * scale, 32 * scale, SDL_WINDOW_SHOWN);
 
   if (!window) {
     std::cout << "Failed to create window: " << SDL_GetError() << std::endl;
@@ -36,17 +36,25 @@ void display::drawWindow(bool gfx[64 * 32])
   // set draw color to white
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
+  std::cout << "Starting to draw window" << std::endl;
   for (int y = 0; y < 32; y++)
-            {
-              for (int x = 0; x < 64; x++)
-              {
-                int rawIndex = x + (y * 64);
-                if (gfx[rawIndex] != 0)
-                {
-                  SDL_RenderDrawPoint(renderer, x, y);
-                }
-              }
-            }
+  {
+    for (int x = 0; x < 64; x++)
+    {
+      int rawIndex = x + (y * 64);
+      if (gfx[rawIndex] != 0)
+      {
+        r.x = x * scale;
+        r.y = y * scale;
+        r.h = scale;
+        r.w = scale;
+
+        SDL_RenderFillRect(renderer, &r);
+      }
+    }
+  }
+
+  std::cout << "Finished drawing window" << std::endl;
 
   // draw window
   SDL_RenderPresent(renderer);
