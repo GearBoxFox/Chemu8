@@ -19,6 +19,7 @@ private:
 
     // 12 bit index and program counter registers
     unsigned short pc;
+    unsigned short pcStack;
 
     // the current opcode
     unsigned short opcode;

@@ -40,11 +40,19 @@ int cpu::executeInstructionLoop()
         FOURTHNIBBLE(opcode),
     };
 
+    unsigned char testValue;
+
     switch (nibbles[0])
     {
     case 0x0:
-        // 0x00E0 - clear screen
-        clearScreen();
+        if (opcode == 0x00E0)
+        {
+            // 0x00E0 - clear screen
+            clearScreen();
+        } else if (opcode == 0x00EE) {
+            // 0x00EE - return from subroutine
+            pc = pcStack;
+        }
         break;
 
     case 0x1:
@@ -56,29 +64,47 @@ int cpu::executeInstructionLoop()
         break;
 
     case 0x2:
+        // 0x2NNN - call subroutine
+        pcStack = pc;
+        pc = 0x0 << 12
+            | nibbles[1] << 8
+            | nibbles[2] << 4
+            | nibbles[3];
         break;
 
     case 0x3:
-        /* code */
+        // 0x3XNN - skip if value in register X is equal to NN
+        testValue = nibbles[2] << 4 | nibbles[3];
+        if (testValue == v[nibbles[1]])
+        {
+            pc += 2;
+        }
         break;
 
     case 0x4:
-        /* code */
+        // 0x4XNN - skip if value in register X is NOT equal to NN
+        testValue = nibbles[2] << 4 | nibbles[3];
+        if (testValue != v[nibbles[1]])
+        {
+            pc += 2;
+        }
         break;
     
     case 0x5:
-        /* code */
+        // 0x5XY0 - skip if register X and Y are equal
+        if (v[nibbles[1]] == v[nibbles[2]])
+        {
+            pc += 2;
+        }
         break;
 
     case 0x6:
         // 0x6XNN - set register VX to NN
-        std::cout << "Setting variable " << nibbles[1] << " to value " << (nibbles[2] << 4 | nibbles[3]) << std::endl;
         v[nibbles[1] - 1] = nibbles[2] << 4 | nibbles[3];
         break;
 
     case 0x7:
         // 0x7XNN - add value NN to register VX
-        std::cout << "Adding " << +(nibbles[2] << 4 | nibbles[3]) << " to register " << +nibbles[1];
         v[nibbles[1]] = v[nibbles[1]] 
             + (nibbles[2] << 4 | nibbles[3]);
         break;
@@ -166,21 +192,6 @@ int cpu::executeInstructionLoop()
                 }
             }
         }
-
-        // v[0xF] = 0;
-        // for (int yline = 0; yline < spriteHeight; yline++)
-        // {
-        //     pixel = mem.getAdress(index + yline);
-        //     for(int xline = 0; xline < 8; xline++)
-        //     {
-        //         if((pixel & (0x80 >> xline)) != 0)
-        //         {
-        //         if(gfx[(x + xline + ((y + yline) * 64))] == 1)
-        //             v[0xF] = 1;                                 
-        //         gfx[x + xline + ((y + yline) * 64)] ^= 1;
-        //         }
-        //     }
-        // }
 
         break;
     }

@@ -81,9 +81,10 @@ int main(int argc, char **args) {
   std::cout << debug << std::endl;
 
   while (true) {
-    // Event loop
+    // timing for frame limiting
+    Uint64 start = SDL_GetPerformanceCounter();
 
-    // debug events
+    // Event loop
     while (SDL_PollEvent(&e) != 0)
     {
       switch (e.type)
@@ -148,6 +149,16 @@ int main(int argc, char **args) {
     if (!debug)
     {
       runCpuCycle(&chip8, &display);
+    }
+
+    Uint64 end = SDL_GetPerformanceCounter();
+
+	  float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+	  // Cap to 60 FPS
+    if ((1.428f - elapsedMS) > 0)
+    {
+	    SDL_Delay(floor(1.428f - elapsedMS));
     }
   }
 

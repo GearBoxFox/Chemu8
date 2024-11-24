@@ -14,5 +14,5 @@ private:
   SDL_Renderer *renderer;
   SDL_Rect r;
 
-  int scale = 2;
+  int scale = 18;
 };
