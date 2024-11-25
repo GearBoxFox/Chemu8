@@ -168,9 +168,12 @@ int cpu::executeInstructionLoop()
             break;
 
         case 0x6:
-            // 0x8XY6 - vX is set to vY >> 1. RIGHT shift
+            // 0x8XY6 - vX is set to vX >> 1. RIGHT shift
             testValue = v[nibbles[1]];
-            v[nibbles[1]] = v[nibbles[2]] >> 1;
+            v[nibbles[1]] = v[nibbles[1]] >> 1;
+
+            // TODO make toggle for modern versions
+            // original chip-8 sets vX to vY >> 1
 
             // vF is set to the bit that was shifted out
             if (testValue & 0x1 != 0)
@@ -195,9 +198,12 @@ int cpu::executeInstructionLoop()
             break;
 
         case 0xE:
-            // 0x8XY6 - vX is set to vY << 1. LEFT shift
+            // 0x8XY6 - vX is set to vX << 1. LEFT shift
             testValue = v[nibbles[1]];
-            v[nibbles[1]] = v[nibbles[2]] << 1;
+            v[nibbles[1]] = v[nibbles[1]] << 1;
+
+            // TODO make toggle for modern versions
+            // original chip-8 sets vX to vY << 1
 
             // vF is set to the bit that was shifted out
             if (testValue & 0xF != 0)
@@ -308,7 +314,55 @@ int cpu::executeInstructionLoop()
         break;
 
     case 0xF:
-        /* code */
+        // Memory Instructions
+        // Based off the last two nibbles
+        result = nibbles[2] << 4 | nibbles[3];
+        switch (result)
+        {
+        case 0x1E:
+            // 0xFX1E - Index += vX
+            index += v[nibbles[1]];
+            break;
+
+        case 0x33:
+            // 0xFX33 - splits the number at vX into three parts of a decimal number,
+            // and stores it at I, I + 1, I + 2.
+            // vX = 152, I = 100, I + 1 = 50, I + 2 = 2
+
+            // copy into a temp value
+            testValue = v[nibbles[1]];
+
+            for (int i = 0; i < 3; i++)
+            {
+                mem.setAdress(index + i, testValue % 10);
+                testValue = testValue / 10;
+            }
+            
+
+        case 0x55:
+            // 0xFX55 - store v0-vX in memory starting at Index
+            // the original chip-8 incremented the index, modern don't
+            // TODO add debug feature later for a toggle
+            for (int i = 0; i < nibbles[1] + 1; i++)
+            {
+                mem.setAdress(index + i, v[i]);
+            }
+            break;
+
+        case 0x65:
+            // 0xFX55 - store v0-vX in memory starting at Index
+            // the original chip-8 incremented the index, modern don't
+            // TODO add debug feature later for a toggle
+            for (int i = 0; i < nibbles[1] + 1; i++)
+            {
+                v[i] = mem.getAdress(index + i);
+            }
+            break;
+            
+        
+        default:
+            break;
+        }
         break;
 
     default:
