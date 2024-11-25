@@ -274,7 +274,7 @@ int cpu::executeInstructionLoop()
                 bool pixel = row & (0x01 << x);
 
                 // error if drawing off screen
-                int xIndex = xCoord + (8 - x);
+                int xIndex = xCoord + (7 - x);
                 if (xIndex > 64) 
                 {
                     std::cout << "Breaking from x overflow" << std::endl;
