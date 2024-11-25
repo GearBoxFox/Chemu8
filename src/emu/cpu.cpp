@@ -5,6 +5,12 @@ cpu::cpu(/* args */)
     pc = 0x200;
     index = 0x0;
     clearScreen();
+    
+    for (int i = 0; i < 16; i++)
+    {
+        v[i] = 0x0;
+    }
+    
 }
 
 cpu::~cpu()
@@ -41,6 +47,7 @@ int cpu::executeInstructionLoop()
     };
 
     unsigned char testValue;
+    int result;
 
     switch (nibbles[0])
     {
@@ -100,7 +107,7 @@ int cpu::executeInstructionLoop()
 
     case 0x6:
         // 0x6XNN - set register VX to NN
-        v[nibbles[1] - 1] = nibbles[2] << 4 | nibbles[3];
+        v[nibbles[1]] = nibbles[2] << 4 | nibbles[3];
         break;
 
     case 0x7:
@@ -110,7 +117,45 @@ int cpu::executeInstructionLoop()
         break;
 
     case 0x8:
-        /* code */
+        // 0x8XYN - ALU Operations
+        switch (nibbles[3])
+        {
+        case 0x0:
+            // 0x8XY0 - Set vX to vY
+            v[nibbles[1]] = v[nibbles[2]];
+            break;
+        
+        case 0x1:
+            // 0x8XY1 - vX is set to the binary OR of vX and vY
+            v[nibbles[1]] = v[nibbles[1]] | v[nibbles[2]];
+            break;
+
+        case 0x2:
+            // 0x8XY2 -vX is set to the binary AND of vX and vY
+            v[nibbles[1]] = v[nibbles[1]] & v[nibbles[2]];
+            break;
+
+        case 0x3:
+            // 0x8XY3 - vX is set to vX + vY. This DOES affect the carry flag
+            testValue = v[nibbles[1]];
+
+            std::cout << +v[nibbles[1]] << " + " << +v[nibbles[2]];
+            result = v[nibbles[1]] + v[nibbles[2]];
+            std::cout << " = " << result << std::endl;
+
+            if (result > 255)
+            {
+                v[nibbles[1]] = result % 256;
+                v[0xF] = 1;
+            } else {
+                v[nibbles[1]] = result;
+                v[0xF] = 0;
+            }
+            break;
+        
+        default:
+            break;
+        }
         break;
 
     case 0x9:
@@ -141,8 +186,8 @@ int cpu::executeInstructionLoop()
         // VX - register that holds the X coord
         // VY - register that holds the Y coord
 
-        int xCoord = v[nibbles[1]]; // modulo 64 because the screen is oly 64 pixel long
-        int yCoord = v[nibbles[2]]; // modulo 32 because the screen is oly 32 pixel tall
+        int xCoord = v[nibbles[1]] % 64; // modulo 64 because the screen is oly 64 pixel long
+        int yCoord = v[nibbles[2]] % 32; // modulo 32 because the screen is oly 32 pixel tall
 
         int spriteHeight = nibbles[3];
         unsigned short pixel;
@@ -160,7 +205,7 @@ int cpu::executeInstructionLoop()
         {
             // get the row for the sprite
             unsigned char row = mem.getAdress(index + y);
-            std::cout << "Pixel row: " << row << std::endl;
+            std::cout << "Pixel row: " << +row << std::endl;
             // draw left->right, each sprite is 8 bits long
             for(int x = 7; x >= 0; x--)
             {
@@ -169,11 +214,19 @@ int cpu::executeInstructionLoop()
 
                 // error if drawing off screen
                 int xIndex = xCoord + (8 - x);
-                if (xIndex > 64) break;
+                if (xIndex > 64) 
+                {
+                    std::cout << "Breaking from x overflow" << std::endl;
+                    break;
+                }
 
                 // error if drawing off screen
                 int yIndex = yCoord + y;
-                if (yIndex > 32) break;
+                if (yIndex > 32) 
+                {
+                    std::cout << "Breaking from y overflow" << std::endl;
+                    break;
+                }
 
                 // the gfx array storing pixels is a 1D array
                 int rawIndex = xIndex + (yIndex * 64);
