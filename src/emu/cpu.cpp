@@ -131,17 +131,18 @@ int cpu::executeInstructionLoop()
             break;
 
         case 0x2:
-            // 0x8XY2 -vX is set to the binary AND of vX and vY
+            // 0x8XY2 - vX is set to the binary AND of vX and vY
             v[nibbles[1]] = v[nibbles[1]] & v[nibbles[2]];
             break;
 
         case 0x3:
-            // 0x8XY3 - vX is set to vX + vY. This DOES affect the carry flag
-            testValue = v[nibbles[1]];
+            // 08XY3 - vX is set to the logical XOR of vX and vY
+            v[nibbles[1]] = v[nibbles[1]] ^ v[nibbles[2]];
+            break;
 
-            std::cout << +v[nibbles[1]] << " + " << +v[nibbles[2]];
+        case 0x4:
+            // 0x8XY4 - vX is set to vX + vY. This DOES affect the carry flag
             result = v[nibbles[1]] + v[nibbles[2]];
-            std::cout << " = " << result << std::endl;
 
             if (result > 255)
             {
@@ -152,7 +153,61 @@ int cpu::executeInstructionLoop()
                 v[0xF] = 0;
             }
             break;
-        
+
+        case 0x5:
+            // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
+            result = v[nibbles[1]] - v[nibbles[2]];
+            v[nibbles[1]] = result % 256;
+
+            if (v[nibbles[1]] > v[nibbles[2]])
+            {
+                v[0xF] = 1;
+            } else {
+                v[0xF] = 0;
+            }
+            break;
+
+        case 0x6:
+            // 0x8XY6 - vX is set to vY >> 1. RIGHT shift
+            testValue = v[nibbles[1]];
+            v[nibbles[1]] = v[nibbles[2]] >> 1;
+
+            // vF is set to the bit that was shifted out
+            if (testValue & 0x1 != 0)
+            {
+                v[0xF] = 1;
+            } else {
+                v[0xF] = 0;
+            }
+            break;
+
+        case 0x7:
+            // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
+            result = v[nibbles[2]] - v[nibbles[1]];
+            v[nibbles[1]] = result % 256;
+
+            if (v[nibbles[2]] > v[nibbles[1]])
+            {
+                v[0xF] = 1;
+            } else {
+                v[0xF] = 0;
+            }
+            break;
+
+        case 0xE:
+            // 0x8XY6 - vX is set to vY << 1. LEFT shift
+            testValue = v[nibbles[1]];
+            v[nibbles[1]] = v[nibbles[2]] << 1;
+
+            // vF is set to the bit that was shifted out
+            if (testValue & 0xF != 0)
+            {
+                v[0xF] = 1;
+            } else {
+                v[0xF] = 0;
+            }
+            break;
+
         default:
             break;
         }
