@@ -7,12 +7,12 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+  "../CMakeLists.txt"
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
-  "/home/rowanfoxx/Documents/github/Chemu8/src/CMakeLists.txt"
-  "/home/rowanfoxx/Documents/github/Chemu8/src/display/CMakeLists.txt"
-  "/home/rowanfoxx/Documents/github/Chemu8/src/emu/CMakeLists.txt"
+  "../src/display/CMakeLists.txt"
+  "../src/emu/CMakeLists.txt"
   "/usr/share/cmake-3.22/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake"
@@ -41,13 +41,14 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "emu/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "display/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/emu/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/display/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/imgui.dir/DependInfo.cmake"
   "CMakeFiles/chemu8.dir/DependInfo.cmake"
-  "emu/CMakeFiles/Emu.dir/DependInfo.cmake"
-  "display/CMakeFiles/Display.dir/DependInfo.cmake"
+  "src/emu/CMakeFiles/Emu.dir/DependInfo.cmake"
+  "src/display/CMakeFiles/Display.dir/DependInfo.cmake"
   )

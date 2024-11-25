@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/chemu8.dir/main.cpp.o"
-  "CMakeFiles/chemu8.dir/main.cpp.o.d"
+  "CMakeFiles/chemu8.dir/src/main.cpp.o"
+  "CMakeFiles/chemu8.dir/src/main.cpp.o.d"
   "bin/chemu8"
   "bin/chemu8.pdb"
 )

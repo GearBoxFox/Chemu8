@@ -8,13 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/rowanfoxx/Documents/github/Chemu8/src/main.cpp" "CMakeFiles/chemu8.dir/src/main.cpp.o" "gcc" "CMakeFiles/chemu8.dir/src/main.cpp.o.d"
+  "/home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp" "src/display/CMakeFiles/Display.dir/display.cpp.o" "gcc" "src/display/CMakeFiles/Display.dir/display.cpp.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/rowanfoxx/Documents/github/Chemu8/build/src/emu/CMakeFiles/Emu.dir/DependInfo.cmake"
-  "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/CMakeFiles/Display.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

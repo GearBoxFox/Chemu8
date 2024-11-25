@@ -1,4 +1,4 @@
-# Install script for directory: /home/rowanfoxx/Documents/github/Chemu8/src
+# Install script for directory: /home/rowanfoxx/Documents/github/Chemu8
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,12 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/rowanfoxx/Documents/github/Chemu8/build/emu/cmake_install.cmake")
+  include("/home/rowanfoxx/Documents/github/Chemu8/build/src/emu/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/rowanfoxx/Documents/github/Chemu8/build/display/cmake_install.cmake")
+  include("/home/rowanfoxx/Documents/github/Chemu8/build/src/display/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

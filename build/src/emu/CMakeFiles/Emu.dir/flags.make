@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/rowanfoxx/Documents/github/Chemu8/build -I/home/rowanfoxx/Documents/github/Chemu8/memory
+CXX_INCLUDES = 
 
 CXX_FLAGS = -g -std=gnu++20
 

@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rowanfoxx/Documents/github/Chemu8/src
+CMAKE_SOURCE_DIR = /home/rowanfoxx/Documents/github/Chemu8
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/rowanfoxx/Documents/github/Chemu8/build
@@ -69,31 +69,31 @@ include CMakeFiles/chemu8.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/chemu8.dir/flags.make
 
-CMakeFiles/chemu8.dir/main.cpp.o: CMakeFiles/chemu8.dir/flags.make
-CMakeFiles/chemu8.dir/main.cpp.o: /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp
-CMakeFiles/chemu8.dir/main.cpp.o: CMakeFiles/chemu8.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/chemu8.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chemu8.dir/main.cpp.o -MF CMakeFiles/chemu8.dir/main.cpp.o.d -o CMakeFiles/chemu8.dir/main.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp
+CMakeFiles/chemu8.dir/src/main.cpp.o: CMakeFiles/chemu8.dir/flags.make
+CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp
+CMakeFiles/chemu8.dir/src/main.cpp.o: CMakeFiles/chemu8.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/chemu8.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chemu8.dir/src/main.cpp.o -MF CMakeFiles/chemu8.dir/src/main.cpp.o.d -o CMakeFiles/chemu8.dir/src/main.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp
 
-CMakeFiles/chemu8.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/chemu8.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp > CMakeFiles/chemu8.dir/main.cpp.i
+CMakeFiles/chemu8.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/chemu8.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp > CMakeFiles/chemu8.dir/src/main.cpp.i
 
-CMakeFiles/chemu8.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/chemu8.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp -o CMakeFiles/chemu8.dir/main.cpp.s
+CMakeFiles/chemu8.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/chemu8.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp -o CMakeFiles/chemu8.dir/src/main.cpp.s
 
 # Object files for target chemu8
 chemu8_OBJECTS = \
-"CMakeFiles/chemu8.dir/main.cpp.o"
+"CMakeFiles/chemu8.dir/src/main.cpp.o"
 
 # External object files for target chemu8
 chemu8_EXTERNAL_OBJECTS =
 
-bin/chemu8: CMakeFiles/chemu8.dir/main.cpp.o
+bin/chemu8: CMakeFiles/chemu8.dir/src/main.cpp.o
 bin/chemu8: CMakeFiles/chemu8.dir/build.make
-bin/chemu8: emu/libEmu.a
-bin/chemu8: display/libDisplay.a
+bin/chemu8: src/emu/libEmu.a
+bin/chemu8: src/display/libDisplay.a
 bin/chemu8: CMakeFiles/chemu8.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/chemu8"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chemu8.dir/link.txt --verbose=$(VERBOSE)
@@ -107,6 +107,6 @@ CMakeFiles/chemu8.dir/clean:
 .PHONY : CMakeFiles/chemu8.dir/clean
 
 CMakeFiles/chemu8.dir/depend:
-	cd /home/rowanfoxx/Documents/github/Chemu8/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rowanfoxx/Documents/github/Chemu8/src /home/rowanfoxx/Documents/github/Chemu8/src /home/rowanfoxx/Documents/github/Chemu8/build /home/rowanfoxx/Documents/github/Chemu8/build /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/chemu8.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rowanfoxx/Documents/github/Chemu8/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rowanfoxx/Documents/github/Chemu8 /home/rowanfoxx/Documents/github/Chemu8 /home/rowanfoxx/Documents/github/Chemu8/build /home/rowanfoxx/Documents/github/Chemu8/build /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/chemu8.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/chemu8.dir/depend
 
