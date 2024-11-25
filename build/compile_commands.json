@@ -1,0 +1,57 @@
+[
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build",
+  "command": "/usr/bin/c++  -I/home/rowanfoxx/Documents/github/Chemu8/build -I/home/rowanfoxx/Documents/github/Chemu8/memory -g -std=gnu++20 -o CMakeFiles/chemu8.dir/src/main.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/main.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/main.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/emu",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/Emu.dir/cpu.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/emu",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/Emu.dir/memory.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/Display.dir/display.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui_demo.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_demo.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_demo.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui_draw.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_draw.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_draw.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui_tables.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_tables.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_tables.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui_widgets.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_widgets.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_widgets.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui_impl_sdlrenderer2.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_impl_sdlrenderer2.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_impl_sdlrenderer2.cpp"
+},
+{
+  "directory": "/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui",
+  "command": "/usr/bin/c++   -g -std=gnu++20 -o CMakeFiles/imgui.dir/imgui_impl_sdl2.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_impl_sdl2.cpp",
+  "file": "/home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui_impl_sdl2.cpp"
+}
+]

@@ -12,6 +12,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
   "../src/display/CMakeLists.txt"
+  "../src/display/imgui/CMakeLists.txt"
   "../src/emu/CMakeLists.txt"
   "/usr/share/cmake-3.22/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake"
@@ -43,12 +44,13 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/emu/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/display/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/display/imgui/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/imgui.dir/DependInfo.cmake"
   "CMakeFiles/chemu8.dir/DependInfo.cmake"
   "src/emu/CMakeFiles/Emu.dir/DependInfo.cmake"
   "src/display/CMakeFiles/Display.dir/DependInfo.cmake"
+  "src/display/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
   )

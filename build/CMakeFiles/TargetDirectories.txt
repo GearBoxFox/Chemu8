@@ -1,4 +1,3 @@
-/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/imgui.dir
 /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/chemu8.dir
 /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/edit_cache.dir
 /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles/rebuild_cache.dir
@@ -8,3 +7,6 @@
 /home/rowanfoxx/Documents/github/Chemu8/build/src/display/CMakeFiles/Display.dir
 /home/rowanfoxx/Documents/github/Chemu8/build/src/display/CMakeFiles/edit_cache.dir
 /home/rowanfoxx/Documents/github/Chemu8/build/src/display/CMakeFiles/rebuild_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui/CMakeFiles/imgui.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui/CMakeFiles/edit_cache.dir
+/home/rowanfoxx/Documents/github/Chemu8/build/src/display/imgui/CMakeFiles/rebuild_cache.dir

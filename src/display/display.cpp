@@ -17,18 +17,51 @@ display::display() {
     std::cout << "Failed to create window: " << SDL_GetError() << std::endl;
   }
 
+  // Create the SDL Renderer
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   if (!renderer) {
     std::cout << "Error creating renderer: " << SDL_GetError() << std::endl;
     exit(-1);
   }
 
+  // Setup Dear ImGui context
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImGuiIO& io = ImGui::GetIO(); (void)io;
+  //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+  //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+  // Setup Dear ImGui style
+  ImGui::StyleColorsDark();
+  //ImGui::StyleColorsLight();
+
+  // Setup Platform/Renderer backends
+  ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+  ImGui_ImplSDLRenderer2_Init(renderer);
+
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 }
 
+bool display::inputLoop(char** keyboardState, 
+                unsigned char v[16],
+                unsigned char gfx[64 * 32],
+                unsigned short index,
+                unsigned short pc,
+                unsigned short stack,
+                unsigned short opcode
+                )
+{
+  
+}
+
 void display::drawWindow(bool gfx[64 * 32])
 {
+  // Start the Dear ImGui frame
+  ImGui_ImplSDLRenderer2_NewFrame();
+  ImGui_ImplSDL2_NewFrame();
+  ImGui::NewFrame();
+
   // clear window to black
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
@@ -53,12 +86,25 @@ void display::drawWindow(bool gfx[64 * 32])
     }
   }
 
+  // show the demo window
+  bool show_demo = true;
+  ImGui::ShowDemoWindow(&show_demo);
+
+  // Rendering
+  ImGui::Render();
+  ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
+
   // draw window
   SDL_RenderPresent(renderer);
 }
 
 display::~display() {
-  // Quit
+  // Quit imgui
+  ImGui_ImplSDLRenderer2_Shutdown();
+  ImGui_ImplSDL2_Shutdown();
+  ImGui::DestroyContext();
+
+  // Quit SDL
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();

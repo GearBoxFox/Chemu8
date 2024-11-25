@@ -1,0 +1,141 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-DEBUG-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "src/emu",
+					"jsonFile" : "directory-src.emu-DEBUG-2ad54b3db7b64adfe7c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src/emu",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "src/display",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-src.display-DEBUG-27380c580e818bb0d9b1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src/display",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "src/display/imgui",
+					"jsonFile" : "directory-src.display.imgui-DEBUG-37af6acda19246fdba25.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "src/display/imgui",
+					"targetIndexes" : 
+					[
+						3
+					]
+				}
+			],
+			"name" : "DEBUG",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "chemu8",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "Display::@ba8f41c22426ca8b56b1",
+					"jsonFile" : "target-Display-DEBUG-58d4cf9118d6f7386fac.json",
+					"name" : "Display",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Emu::@b11ab8efbdda3dc644fc",
+					"jsonFile" : "target-Emu-DEBUG-c1ba365b3d113604a65a.json",
+					"name" : "Emu",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "chemu8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-chemu8-DEBUG-5e47979dac300f33a9c5.json",
+					"name" : "chemu8",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "imgui::@618a5c813b3d69b44ab3",
+					"jsonFile" : "target-imgui-DEBUG-fa0780f2faf327a33e21.json",
+					"name" : "imgui",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/rowanfoxx/Documents/github/Chemu8/build",
+		"source" : "/home/rowanfoxx/Documents/github/Chemu8"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
