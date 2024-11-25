@@ -27,9 +27,6 @@ int main(int argc, char **args) {
   cpu chip8;
   display display;
 
-  // SDL event
-  SDL_Event e;
-
   // the first argument should be the ROM file to load
   if (argc < 2) {
     std::cout << "Missing ROM file to play." << std::endl;
@@ -78,75 +75,25 @@ int main(int argc, char **args) {
   }
 
   bool debug = (args[2] != NULL);
-  std::cout << debug << std::endl;
+  display.setDebug(debug);
+
+  char** keyboardState;
+  bool runLoop = false;
 
   while (true) {
     // timing for frame limiting
     Uint64 start = SDL_GetPerformanceCounter();
 
-    // Event loop
-    while (SDL_PollEvent(&e) != 0)
-    {
-      switch (e.type)
-      {
-        case SDL_QUIT:
-          return 0;
-          break;
+    runLoop = display.inputLoop(
+      keyboardState,
+      chip8.v,
+      chip8.gfx,
+      chip8.index,
+      chip8.pc,
+      chip8.pcStack,
+      chip8.opcode);
 
-        case SDL_KEYDOWN:
-          // testkeycode
-          switch (e.key.keysym.sym)
-          {
-            case SDLK_0:
-              debug = !debug;
-              break;
-
-            if (debug)
-            {
-              case SDLK_SPACE:
-                std::cout << "Executing loop cycle" << std::endl;
-
-                runCpuCycle(&chip8, &display);
-              break;
-
-              case SDLK_g:
-                // print graphics memory for debugging
-                for (int y = 0; y < 32; y++)
-                {
-                  for (int x = 0; x < 64; x++)
-                  {
-                    int rawIndex = x + (y * 64);
-                    if (chip8.gfx[rawIndex] != 0)
-                    {
-                      std::cout << "1";
-                    } else {
-                      std::cout << "0";
-                    }
-
-                    std::cout << " ";
-                  }
-                  
-                  std::cout << std::endl;
-                }
-
-                break;
-                
-              case SDLK_b:
-                for (int i = 0; i < 16; i++)
-                {
-                  std::cout << "Register " << i << ": "  << +chip8.v[i] << std::endl;
-                }
-
-                std::cout << "Index: " << std::hex << chip8.index << std::dec << std::endl;
-                break;
-            }
-          }
-
-          break;
-      }
-    }
-
-    if (!debug)
+    if (runLoop)
     {
       runCpuCycle(&chip8, &display);
     }

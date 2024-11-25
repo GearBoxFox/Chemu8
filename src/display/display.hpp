@@ -16,17 +16,23 @@ public:
   // Handles getting input from SDL2 + Imgui. Gets the CPU emulator for reading debug information.
   bool inputLoop(char** keyboardState, 
                 unsigned char v[16],
-                unsigned char gfx[64 * 32],
+                bool gfx[64 * 32],
                 unsigned short index,
                 unsigned short pc,
                 unsigned short stack,
-                unsigned short opcode,
+                unsigned short opcode
                 );
+
+  void setDebug(bool d);
 
 private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Rect r;
+
+  // SDL event
+  SDL_Event e;
+  bool debug = true;
 
   int scale = 18;
 };

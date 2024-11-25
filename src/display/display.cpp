@@ -43,16 +43,80 @@ display::display() {
   SDL_RenderClear(renderer);
 }
 
+void display::setDebug(bool d)
+{
+  debug = d;
+}
+
 bool display::inputLoop(char** keyboardState, 
                 unsigned char v[16],
-                unsigned char gfx[64 * 32],
+                bool gfx[64 * 32],
                 unsigned short index,
                 unsigned short pc,
                 unsigned short stack,
-                unsigned short opcode
-                )
+                unsigned short opcode)
 {
-  
+  // Event loop
+  while (SDL_PollEvent(&e) != 0)
+  {
+    switch (e.type)
+    {
+      case SDL_QUIT:
+        exit(0);
+        break;
+
+      case SDL_KEYDOWN:
+        // testkeycode
+        switch (e.key.keysym.sym)
+        {
+          case SDLK_0:
+            debug = !debug;
+            break;
+
+          if (debug)
+          {
+            case SDLK_SPACE:
+              return true;
+              break;
+
+            case SDLK_g:
+              // print graphics memory for debugging
+              for (int y = 0; y < 32; y++)
+              {
+                for (int x = 0; x < 64; x++)
+                {
+                  int rawIndex = x + (y * 64);
+                  if (gfx[rawIndex] != 0)
+                  {
+                    std::cout << "1";
+                  } else {
+                    std::cout << "0";
+                  }
+
+                  std::cout << " ";
+                }
+                
+                std::cout << std::endl;
+              }
+
+              break;
+              
+            case SDLK_b:
+              for (int i = 0; i < 16; i++)
+              {
+                std::cout << "Register " << i << ": "  << +v[i] << std::endl;
+              }
+
+              std::cout << "Index: " << std::hex << +index << std::dec << std::endl;
+              break;
+          }
+        }
+
+        break;
+    }
+  }
+
+  return !debug;
 }
 
 void display::drawWindow(bool gfx[64 * 32])

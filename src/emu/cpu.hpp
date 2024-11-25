@@ -17,13 +17,6 @@ private:
     // RAM for fonts + program + work
     chipMemory mem;
 
-    // 12 bit index and program counter registers
-    unsigned short pc;
-    unsigned short pcStack;
-
-    // the current opcode
-    unsigned short opcode;
-    
     // two delay timers, both updating at 60 Hz
     unsigned char delay_timer;
     unsigned char sound_timer;
@@ -41,6 +34,13 @@ public:
     // 15 1-byte general purpose registers + 1 carry-bit register
     unsigned char v[16];
     unsigned short index;
+
+    // 12 bit index and program counter registers
+    unsigned short pc;
+    unsigned short pcStack;
+
+    // the current opcode
+    unsigned short opcode;
 
     // runs the basic fetch-decode-execute loop
     int executeInstructionLoop();
