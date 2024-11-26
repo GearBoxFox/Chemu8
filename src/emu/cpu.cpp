@@ -169,12 +169,15 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
+            std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << std::endl;
 
-            if (v[nibbles[1]] > v[nibbles[2]])
+            if (v[nibbles[1]] >= v[nibbles[2]])
             {
                 v[0xF] = 1;
+                std::cout << "Setting overflow" << std::endl;
             } else {
                 v[0xF] = 0;
+                std::cout << "Clearing overflow" << std::endl;
             }
 
             v[nibbles[1]] = result % 256;
@@ -201,7 +204,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
             // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
             result = v[nibbles[2]] - v[nibbles[1]];
 
-            if (v[nibbles[2]] > v[nibbles[1]])
+            if (v[nibbles[2]] >= v[nibbles[1]])
             {
                 v[0xF] = 1;
             } else {
@@ -282,14 +285,14 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         std::hex << yCoord << 
         std::dec << std::endl;
 
-        std::cout << "Sprite height: " << spriteHeight << std::endl;
+        // std::cout << "Sprite height: " << spriteHeight << std::endl;
 
         // draw top->bottom
         for (int y = 0; y < spriteHeight; y++)
         {
             // get the row for the sprite
             unsigned char row = mem.getAdress(index + y);
-            std::cout << "Pixel row: " << +row << std::endl;
+            // std::cout << "Pixel row: " << +row << std::endl;
             // draw left->right, each sprite is 8 bits long
             for(int x = 7; x >= 0; x--)
             {
@@ -300,7 +303,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
                 int xIndex = xCoord + (7 - x);
                 if (xIndex > 64) 
                 {
-                    std::cout << "Breaking from x overflow" << std::endl;
+                    // std::cout << "Breaking from x overflow" << std::endl;
                     break;
                 }
 
@@ -308,7 +311,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
                 int yIndex = yCoord + y;
                 if (yIndex > 32) 
                 {
-                    std::cout << "Breaking from y overflow" << std::endl;
+                    // std::cout << "Breaking from y overflow" << std::endl;
                     break;
                 }
 
@@ -316,13 +319,13 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
                 int rawIndex = xIndex + (yIndex * 64);
                 bool currentPixel = gfx[rawIndex];
 
-                std::cout << "Drawing pixel at (" << xIndex << ", " << yIndex << "). Raw: " << rawIndex << std::endl;
-                std::cout << "Current pixel: " << currentPixel << ". New pixel: " << pixel << std::endl;
+                // std::cout << "Drawing pixel at (" << xIndex << ", " << yIndex << "). Raw: " << rawIndex << std::endl;
+                // std::cout << "Current pixel: " << currentPixel << ". New pixel: " << pixel << std::endl;
 
                 // the pixels are drawn by xoring 
                 bool overflow = currentPixel ^ pixel;
                 if (overflow) {
-                    std::cout << "Pixel drawn!" << std::endl;
+                    // std::cout << "Pixel drawn!" << std::endl;
                     gfx[rawIndex] = !gfx[rawIndex];
                     v[0xF] = 1;
                     drawFlag = true;
@@ -340,7 +343,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         switch (nibbles[1])
         {
         case 0x0:
-            keyPressed = keyboard[SDL_SCANCODE_0];
+            keyPressed = keyboard[SDL_SCANCODE_X];
             break;
 
         case 0x1:
@@ -352,55 +355,55 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
             break;
 
         case 0x3:
-            keyPressed = keyboard[SDL_SCANCODE_3];
+            keyPressed = keyboard[SDL_SCANCODE_Q];
             break;
 
         case 0x4:
-            keyPressed = keyboard[SDL_SCANCODE_4];
+            keyPressed = keyboard[SDL_SCANCODE_W];
             break;
 
         case 0x5:
-            keyPressed = keyboard[SDL_SCANCODE_5];
+            keyPressed = keyboard[SDL_SCANCODE_E];
             break;
         
         case 0x6:
-            keyPressed = keyboard[SDL_SCANCODE_6];
-            break;
-
-        case 0x7:
-            keyPressed = keyboard[SDL_SCANCODE_7];
-            break;
-
-        case 0x8:
-            keyPressed = keyboard[SDL_SCANCODE_8];
-            break;
-
-        case 0x9:
-            keyPressed = keyboard[SDL_SCANCODE_9];
-            break;
-
-        case 0xA:
             keyPressed = keyboard[SDL_SCANCODE_A];
             break;
 
-        case 0xB:
-            keyPressed = keyboard[SDL_SCANCODE_B];
+        case 0x7:
+            keyPressed = keyboard[SDL_SCANCODE_S];
             break;
 
-        case 0xC:
-            keyPressed = keyboard[SDL_SCANCODE_C];
-            break;
-
-        case 0xD:
+        case 0x8:
             keyPressed = keyboard[SDL_SCANCODE_D];
             break;
 
+        case 0x9:
+            keyPressed = keyboard[SDL_SCANCODE_Z];
+            break;
+
+        case 0xA:
+            keyPressed = keyboard[SDL_SCANCODE_Z];
+            break;
+
+        case 0xB:
+            keyPressed = keyboard[SDL_SCANCODE_C];
+            break;
+
+        case 0xC:
+            keyPressed = keyboard[SDL_SCANCODE_4];
+            break;
+
+        case 0xD:
+            keyPressed = keyboard[SDL_SCANCODE_R];
+            break;
+
         case 0xE:
-            keyPressed = keyboard[SDL_SCANCODE_E];
+            keyPressed = keyboard[SDL_SCANCODE_F];
             break;
 
         case 0xF:
-            keyPressed = keyboard[SDL_SCANCODE_F];
+            keyPressed = keyboard[SDL_SCANCODE_V];
             break;
         }
 
