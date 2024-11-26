@@ -214,8 +214,6 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/quoted_string.h \
   /usr/include/c++/11/sstream \
   /usr/include/c++/11/bits/sstream.tcc \
-  ../src/emu/memory.hpp \
-  ../src/display/display.hpp \
   /usr/include/SDL2/SDL.h \
   /usr/include/SDL2/SDL_main.h \
   /usr/include/SDL2/SDL_stdinc.h \
@@ -382,6 +380,8 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/SDL2/SDL_version.h \
   /usr/include/SDL2/SDL_locale.h \
   /usr/include/SDL2/SDL_misc.h \
+  ../src/emu/memory.hpp \
+  ../src/display/display.hpp \
   /usr/include/SDL2/SDL_render.h \
   ../src/display/imgui/imgui.h \
   ../src/display/imgui/imconfig.h \
@@ -395,6 +395,10 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 ../src/display/imgui/imconfig.h:
 
 ../src/display/imgui/imgui.h:
+
+../src/display/display.hpp:
+
+../src/emu/memory.hpp:
 
 /usr/include/SDL2/SDL_locale.h:
 
@@ -563,10 +567,6 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512cdintrin.h:
 
 /usr/include/SDL2/SDL_mutex.h:
-
-/usr/include/SDL2/SDL_endian.h:
-
-/usr/include/SDL2/SDL_error.h:
 
 /usr/include/c++/11/backward/binders.h:
 
@@ -880,8 +880,6 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
-../src/emu/memory.hpp:
-
 /usr/include/c++/11/bits/exception_ptr.h:
 
 /usr/include/c++/11/ext/string_conversions.h:
@@ -1086,6 +1084,8 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h:
 
+/usr/include/SDL2/SDL_error.h:
+
 /usr/include/c++/11/bits/locale_conv.h:
 
 /usr/include/c++/11/bits/stl_relops.h:
@@ -1099,8 +1099,6 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/math.h:
 
 /usr/include/c++/11/sstream:
-
-../src/display/display.hpp:
 
 /usr/include/SDL2/SDL.h:
 
@@ -1159,3 +1157,5 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/cstdlib:
 
 /usr/include/SDL2/SDL_atomic.h:
+
+/usr/include/SDL2/SDL_endian.h:

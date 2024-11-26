@@ -93,6 +93,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
     case 0x4:
         // 0x4XNN - skip if value in register X is NOT equal to NN
         testValue = nibbles[2] << 4 | nibbles[3];
+        std::cout << "Does " << +v[nibbles[1]] << " equal " << +testValue << std::endl; 
         if (testValue != v[nibbles[1]])
         {
             pc += 2;

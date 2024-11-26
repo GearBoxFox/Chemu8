@@ -215,8 +215,6 @@ CMakeFiles/chemu8.dir/src/main.cpp.o
  /usr/include/c++/11/bits/quoted_string.h
  /usr/include/c++/11/sstream
  /usr/include/c++/11/bits/sstream.tcc
- /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.hpp
- /home/rowanfoxx/Documents/github/Chemu8/src/display/display.hpp
  /usr/include/SDL2/SDL.h
  /usr/include/SDL2/SDL_main.h
  /usr/include/SDL2/SDL_stdinc.h
@@ -383,6 +381,8 @@ CMakeFiles/chemu8.dir/src/main.cpp.o
  /usr/include/SDL2/SDL_version.h
  /usr/include/SDL2/SDL_locale.h
  /usr/include/SDL2/SDL_misc.h
+ /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.hpp
+ /home/rowanfoxx/Documents/github/Chemu8/src/display/display.hpp
  /usr/include/SDL2/SDL_render.h
  /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imgui.h
  /home/rowanfoxx/Documents/github/Chemu8/src/display/imgui/imconfig.h
