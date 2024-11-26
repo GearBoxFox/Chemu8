@@ -10,7 +10,8 @@ cpu::cpu(/* args */)
     {
         v[i] = 0x0;
     }
-    
+
+    srand(time(0));
 }
 
 cpu::~cpu()
@@ -25,7 +26,7 @@ void cpu::loadRomFile(char* rom, size_t romSize)
     }
 }
 
-int cpu::executeInstructionLoop()
+int cpu::executeInstructionLoop(const Uint8 *keyboard)
 {
     // fetch step
     // loads the current program counter into the index 
@@ -169,12 +170,12 @@ int cpu::executeInstructionLoop()
             break;
 
         case 0x6:
-            // 0x8XY6 - vX is set to vX >> 1. RIGHT shift
+            // 0x8XY6 - vX is set to vY >> 1. RIGHT shift
             testValue = v[nibbles[1]];
-            v[nibbles[1]] = v[nibbles[1]] >> 1;
+            v[nibbles[1]] = v[nibbles[2]] >> 1;
 
             // TODO make toggle for modern versions
-            // original chip-8 sets vX to vY >> 1
+            // modern chip-8 sets vX to vX >> 1
 
             // vF is set to the bit that was shifted out
             if (testValue & 0x1 != 0)
@@ -199,12 +200,12 @@ int cpu::executeInstructionLoop()
             break;
 
         case 0xE:
-            // 0x8XY6 - vX is set to vX << 1. LEFT shift
+            // 0x8XY6 - vX is set to vY << 1. LEFT shift
             testValue = v[nibbles[1]];
-            v[nibbles[1]] = v[nibbles[1]] << 1;
+            v[nibbles[1]] = v[nibbles[2]] << 1;
 
             // TODO make toggle for modern versions
-            // original chip-8 sets vX to vY << 1
+            // modern chip-8 sets vX to vX << 1
 
             // vF is set to the bit that was shifted out
             if (testValue & 0xF != 0)
@@ -221,7 +222,11 @@ int cpu::executeInstructionLoop()
         break;
 
     case 0x9:
-        /* code */
+        // 0x9XY0 - skip if register X and Y are NOT equal
+        if (v[nibbles[1]] != v[nibbles[2]])
+        {
+            pc += 2;
+        }
         break;
 
     case 0xA:
@@ -233,11 +238,16 @@ int cpu::executeInstructionLoop()
         break;
 
     case 0xB:
-        /* code */
+        // 0xBNNN - Jump to adress v0 + NNN
+        // Modern chip-8 is 0xBXNNN, jump to adress vX + NN
+        index = v[0x0] + nibbles[1] << 8
+            | nibbles[2] << 4
+            | nibbles[3];
         break;
 
     case 0xC:
-        /* code */
+        // 0xCXNN - Put a random number from 0 - NN into vX
+        v[nibbles[1]] = rand() % (nibbles[2] << 4 | nibbles[3]) + 1;
         break;
 
     case 0xD:
@@ -311,7 +321,86 @@ int cpu::executeInstructionLoop()
         break;
     }
     case 0xE:
-        /* code */
+        // Skip if key - two opcodes here
+        // 0xEX9E - Skip if key X is pressed
+        // 0xEXA1 - Skip if key X is NOT pressed
+        bool keyPressed;
+        switch (nibbles[1])
+        {
+        case 0x0:
+            keyPressed = keyboard[SDL_SCANCODE_0];
+            break;
+
+        case 0x1:
+            keyPressed = keyboard[SDL_SCANCODE_1];
+            break;
+
+        case 0x2:
+            keyPressed = keyboard[SDL_SCANCODE_2];
+            break;
+
+        case 0x3:
+            keyPressed = keyboard[SDL_SCANCODE_3];
+            break;
+
+        case 0x4:
+            keyPressed = keyboard[SDL_SCANCODE_4];
+            break;
+
+        case 0x5:
+            keyPressed = keyboard[SDL_SCANCODE_5];
+            break;
+        
+        case 0x6:
+            keyPressed = keyboard[SDL_SCANCODE_6];
+            break;
+
+        case 0x7:
+            keyPressed = keyboard[SDL_SCANCODE_7];
+            break;
+
+        case 0x8:
+            keyPressed = keyboard[SDL_SCANCODE_8];
+            break;
+
+        case 0x9:
+            keyPressed = keyboard[SDL_SCANCODE_9];
+            break;
+
+        case 0xA:
+            keyPressed = keyboard[SDL_SCANCODE_A];
+            break;
+
+        case 0xB:
+            keyPressed = keyboard[SDL_SCANCODE_B];
+            break;
+
+        case 0xC:
+            keyPressed = keyboard[SDL_SCANCODE_C];
+            break;
+
+        case 0xD:
+            keyPressed = keyboard[SDL_SCANCODE_D];
+            break;
+
+        case 0xE:
+            keyPressed = keyboard[SDL_SCANCODE_E];
+            break;
+
+        case 0xF:
+            keyPressed = keyboard[SDL_SCANCODE_F];
+            break;
+        }
+
+        if (nibbles[3] == 0xE && keyPressed)
+        {
+            // Skip if key
+            pc += 2;
+        } else if (nibbles[3] == 0x1 && !keyPressed) {
+            // Skip if not key
+            pc += 2;
+        }
+
         break;
 
     case 0xF:
@@ -356,7 +445,7 @@ int cpu::executeInstructionLoop()
             // TODO add debug feature later for a toggle
             for (int i = 0; i < nibbles[1] + 1; i++)
             {
-                v[i] = mem.getAdress(index + i);
+                v[i] = mem.getAdress(index++);
             }
             break;
             

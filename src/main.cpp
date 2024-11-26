@@ -4,10 +4,10 @@
 #include <iostream>
 #include <stdio.h>
 
-void runCpuCycle(cpu *chip, display *dis)
+void runCpuCycle(cpu *chip, display *dis, const Uint8 *keyboard)
 {
   // run CPU clock cycle
-  if (chip->executeInstructionLoop() != 0)
+  if (chip->executeInstructionLoop(keyboard) != 0)
   {
     exit(-1);
   }
@@ -79,7 +79,7 @@ int main(int argc, char **args) {
   bool debug = (args[2] != NULL);
   display.setDebug(debug);
 
-  char** keyboardState;
+  const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
   bool runLoop = false;
 
   while (true) {
@@ -87,7 +87,6 @@ int main(int argc, char **args) {
     Uint64 start = SDL_GetPerformanceCounter();
 
     runLoop = display.inputLoop(
-      keyboardState,
       chip8.v,
       chip8.gfx,
       chip8.index,
@@ -97,7 +96,7 @@ int main(int argc, char **args) {
 
     if (runLoop)
     {
-      runCpuCycle(&chip8, &display);
+      runCpuCycle(&chip8, &display, keyboardState);
     }
 
     Uint64 end = SDL_GetPerformanceCounter();

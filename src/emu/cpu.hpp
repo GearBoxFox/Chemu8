@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
+#include <SDL2/SDL.h>
 #include "./memory.hpp"
 
 // macros for extracting nibbles from opcodes
@@ -10,6 +13,9 @@
 #define SECONDNIBBLE(x) (x & 0x0F00) >> 8
 #define THIRDNIBBLE(x)  (x & 0x00F0) >> 4
 #define FOURTHNIBBLE(x) (x & 0x000F)
+
+// SDLs Uint8 typedef
+typedef uint8_t Uint8;
 
 class cpu
 {
@@ -43,7 +49,7 @@ public:
     unsigned short opcode;
 
     // runs the basic fetch-decode-execute loop
-    int executeInstructionLoop();
+    int executeInstructionLoop(const Uint8 *keyboard);
 
     // loads a program into the memory and starts the execution
     void loadRomFile(char* rom, size_t romSize);

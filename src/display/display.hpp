@@ -14,8 +14,7 @@ public:
   void drawWindow(bool gfx[64 * 32]);
 
   // Handles getting input from SDL2 + Imgui. Gets the CPU emulator for reading debug information.
-  bool inputLoop(char** keyboardState, 
-                unsigned char v[16],
+  bool inputLoop(unsigned char v[16],
                 bool gfx[64 * 32],
                 unsigned short index,
                 unsigned short pc,

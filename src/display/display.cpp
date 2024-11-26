@@ -68,8 +68,7 @@ void display::setDebug(bool d)
   debug = d;
 }
 
-bool display::inputLoop(char** keyboardState, 
-                unsigned char v[16],
+bool display::inputLoop(unsigned char v[16],
                 bool gfx[64 * 32],
                 unsigned short index,
                 unsigned short pc,
