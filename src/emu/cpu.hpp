@@ -47,6 +47,9 @@ public:
 
     // loads a program into the memory and starts the execution
     void loadRomFile(char* rom, size_t romSize);
+
+    // updates the timers and makes the beep if neccessary
+    bool updateTimers();
 };
 
 #endif

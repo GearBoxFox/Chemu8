@@ -25,39 +25,39 @@ display::display() {
   }
 
   // Setup Dear ImGui context
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  ImGuiIO& io = ImGui::GetIO();
-  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-  //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+  // IMGUI_CHECKVERSION();
+  // ImGui::CreateContext();
+  // ImGuiIO& io = ImGui::GetIO();
+  // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+  // //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
-  io.WantCaptureMouse = true; 
-  io.WantCaptureKeyboard = true;
+  // io.WantCaptureMouse = true; 
+  // io.WantCaptureKeyboard = true;
 
-  // Setup Dear ImGui style
-  ImGui::StyleColorsDark();
-  //ImGui::StyleColorsLight();
+  // // Setup Dear ImGui style
+  // ImGui::StyleColorsDark();
+  // //ImGui::StyleColorsLight();
 
-  // Setup Platform/Renderer backends
-  ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
-  ImGui_ImplSDLRenderer2_Init(renderer);
+  // // Setup Platform/Renderer backends
+  // ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+  // ImGui_ImplSDLRenderer2_Init(renderer);
 
   // clear the screen
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
   // Start the Dear ImGui frame
-  ImGui_ImplSDLRenderer2_NewFrame();
-  ImGui_ImplSDL2_NewFrame();
-  ImGui::NewFrame();
+  // ImGui_ImplSDLRenderer2_NewFrame();
+  // ImGui_ImplSDL2_NewFrame();
+  // ImGui::NewFrame();
 
   // show the demo window
   bool show_demo = true;
-  ImGui::ShowDemoWindow(&show_demo);
+  // ImGui::ShowDemoWindow(&show_demo);
 
   // Rendering
-  ImGui::Render();
-  ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
+  // ImGui::Render();
+  // ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
 
   // draw window
   SDL_RenderPresent(renderer);
@@ -80,7 +80,7 @@ bool display::inputLoop(char** keyboardState,
   while (SDL_PollEvent(&e) != 0)
   {
     // let ImGui handle the events as well
-    ImGui_ImplSDL2_ProcessEvent(&e);
+    // ImGui_ImplSDL2_ProcessEvent(&e);
 
     switch (e.type)
     {
@@ -131,6 +131,7 @@ bool display::inputLoop(char** keyboardState,
               }
 
               std::cout << "Index: " << std::hex << +index << std::dec << std::endl;
+              std::cout << "Stack: " << std::hex << +stack << std::dec << std::endl;
               break;
           }
         }
@@ -145,9 +146,9 @@ bool display::inputLoop(char** keyboardState,
 void display::drawWindow(bool gfx[64 * 32])
 {
   // Start the Dear ImGui frame
-  ImGui_ImplSDLRenderer2_NewFrame();
-  ImGui_ImplSDL2_NewFrame();
-  ImGui::NewFrame();
+  // ImGui_ImplSDLRenderer2_NewFrame();
+  // ImGui_ImplSDL2_NewFrame();
+  // ImGui::NewFrame();
 
   // clear window to black
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -174,35 +175,35 @@ void display::drawWindow(bool gfx[64 * 32])
   }
 
   // show the demo window
-  bool show_demo = true;
-  ImGui::ShowDemoWindow(&show_demo);
+  // bool show_demo = true;
+  // ImGui::ShowDemoWindow(&show_demo);
 
   // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-  {
-      static float f = 0.0f;
-      static int counter = 0;
+  // {
+  //     static float f = 0.0f;
+  //     static int counter = 0;
 
-      ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+  //     ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
 
-      ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-      ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Another Window", &show_another_window);
+  //     ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+  //     ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+  //     ImGui::Checkbox("Another Window", &show_another_window);
 
-      ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-      ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+  //     ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+  //     ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
-      if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-          counter++;
-      ImGui::SameLine();
-      ImGui::Text("counter = %d", counter);
+  //     if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+  //         counter++;
+  //     ImGui::SameLine();
+  //     ImGui::Text("counter = %d", counter);
 
-      ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-      ImGui::End();
-  }
+  //     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+  //     ImGui::End();
+  // }
 
   // Rendering
-  ImGui::Render();
-  ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
+  // ImGui::Render();
+  // ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
 
   // draw window
   SDL_RenderPresent(renderer);
@@ -210,9 +211,9 @@ void display::drawWindow(bool gfx[64 * 32])
 
 display::~display() {
   // Quit imgui
-  ImGui_ImplSDLRenderer2_Shutdown();
-  ImGui_ImplSDL2_Shutdown();
-  ImGui::DestroyContext();
+  // ImGui_ImplSDLRenderer2_Shutdown();
+  // ImGui_ImplSDL2_Shutdown();
+  // ImGui::DestroyContext();
 
   // Quit SDL
   SDL_DestroyRenderer(renderer);

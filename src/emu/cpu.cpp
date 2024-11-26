@@ -58,6 +58,7 @@ int cpu::executeInstructionLoop()
             clearScreen();
         } else if (opcode == 0x00EE) {
             // 0x00EE - return from subroutine
+            std::cout << "Returning from subroutine" << std::endl;
             pc = pcStack;
         }
         break;
@@ -372,6 +373,22 @@ int cpu::executeInstructionLoop()
     } 
 
     return 0;
+}
+
+bool cpu::updateTimers()
+{
+    if (delay_timer > 0)
+    {
+        delay_timer--;
+    }
+
+    if (sound_timer > 0)
+    {
+        sound_timer--;
+        return true;
+    }
+
+    return false;
 }
 
 void cpu::clearScreen()

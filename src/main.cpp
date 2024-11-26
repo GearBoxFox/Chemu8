@@ -27,6 +27,8 @@ int main(int argc, char **args) {
   cpu chip8;
   display display;
 
+  Uint64 timer = 0.0;
+
   // the first argument should be the ROM file to load
   if (argc < 2) {
     std::cout << "Missing ROM file to play." << std::endl;
@@ -101,11 +103,18 @@ int main(int argc, char **args) {
     Uint64 end = SDL_GetPerformanceCounter();
 
 	  float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+    timer += elapsedMS;
 
-	  // Cap to 60 FPS
-    if ((1.428f - elapsedMS) > 0)
+	  // Cap to 200 FPS, roughly the frame rate of the chip-8
+    if ((6.428f - elapsedMS) > 0)
     {
-	    SDL_Delay(floor(1.428f - elapsedMS));
+	    SDL_Delay(floor(6.428f - elapsedMS));
+    }
+
+    // Timers only update on a 60Hrz frequency
+    if (timer > 16.666f && runLoop)
+    {
+      chip8.updateTimers();
     }
   }
 
