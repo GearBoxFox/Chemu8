@@ -130,7 +130,7 @@ bool display::inputLoop(unsigned char v[16],
               }
 
               std::cout << "Index: " << std::hex << +index << std::dec << std::endl;
-              std::cout << "Stack: " << std::hex << +stack << std::dec << std::endl;
+              std::cout << "Stack: " << std::hex << stack << std::dec << std::endl;
               break;
           }
         }

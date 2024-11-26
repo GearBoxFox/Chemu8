@@ -43,7 +43,8 @@ public:
 
     // 12 bit index and program counter registers
     unsigned short pc;
-    unsigned short pcStack;
+    unsigned short stackPointer;
+    unsigned short stack[16];
 
     // the current opcode
     unsigned short opcode;

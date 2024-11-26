@@ -91,7 +91,7 @@ int main(int argc, char **args) {
       chip8.gfx,
       chip8.index,
       chip8.pc,
-      chip8.pcStack,
+      chip8.stackPointer,
       chip8.opcode);
 
     if (runLoop)

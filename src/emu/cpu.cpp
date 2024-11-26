@@ -4,6 +4,12 @@ cpu::cpu(/* args */)
 {
     pc = 0x200;
     index = 0x0;
+    stackPointer = 0x0;
+
+    delay_timer = 0x0;
+    sound_timer = 0x0;
+
+    opcode = 0x0;
     clearScreen();
     
     for (int i = 0; i < 16; i++)
@@ -60,7 +66,8 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         } else if (opcode == 0x00EE) {
             // 0x00EE - return from subroutine
             std::cout << "Returning from subroutine" << std::endl;
-            pc = pcStack;
+            --stackPointer;
+            pc = stack[stackPointer];
         }
         break;
 
@@ -74,7 +81,9 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
 
     case 0x2:
         // 0x2NNN - call subroutine
-        pcStack = pc;
+        std::cout << "Seting stack to: " << pc << std::endl;
+        stack[stackPointer] = pc;
+        stackPointer++;
         pc = 0x0 << 12
             | nibbles[1] << 8
             | nibbles[2] << 4
@@ -93,7 +102,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
     case 0x4:
         // 0x4XNN - skip if value in register X is NOT equal to NN
         testValue = nibbles[2] << 4 | nibbles[3];
-        std::cout << "Does " << +v[nibbles[1]] << " equal " << +testValue << std::endl; 
+        std::cout << "Does " << +v[nibbles[1]] << " not equal " << +testValue << std::endl; 
         if (testValue != v[nibbles[1]])
         {
             pc += 2;
@@ -160,7 +169,6 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
-            v[nibbles[1]] = result % 256;
 
             if (v[nibbles[1]] > v[nibbles[2]])
             {
@@ -168,6 +176,8 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
             } else {
                 v[0xF] = 0;
             }
+
+            v[nibbles[1]] = result % 256;
             break;
 
         case 0x6:
@@ -190,7 +200,6 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         case 0x7:
             // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
             result = v[nibbles[2]] - v[nibbles[1]];
-            v[nibbles[1]] = result % 256;
 
             if (v[nibbles[2]] > v[nibbles[1]])
             {
@@ -198,6 +207,8 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
             } else {
                 v[0xF] = 0;
             }
+
+            v[nibbles[1]] = result % 256;
             break;
 
         case 0xE:
