@@ -4,22 +4,6 @@
 #include <iostream>
 #include <stdio.h>
 
-void runCpuCycle(cpu *chip, display *dis, const Uint8 *keyboard)
-{
-  // run CPU clock cycle
-  if (chip->executeInstructionLoop(keyboard) != 0)
-  {
-    exit(-1);
-  }
-
-  // draw the screen
-  if (chip->drawFlag)
-  {
-    chip->drawFlag = false;
-    dis->drawWindow(chip->gfx);
-  }
-}
-
 // You must include the command line parameters for your main function to be
 // recognized by SDL
 int main(int argc, char **args) {
@@ -79,7 +63,8 @@ int main(int argc, char **args) {
   bool debug = (args[2] != NULL);
   display.setDebug(debug);
 
-  const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
+  bool keyboardState[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  bool *keyPtr = keyboardState;
   bool runLoop = false;
 
   while (true) {
@@ -87,6 +72,7 @@ int main(int argc, char **args) {
     Uint64 start = SDL_GetPerformanceCounter();
 
     runLoop = display.inputLoop(
+      keyPtr,
       chip8.v,
       chip8.gfx,
       chip8.index,
@@ -94,9 +80,26 @@ int main(int argc, char **args) {
       chip8.stackPointer,
       chip8.opcode);
 
+    // std::cout << "Current keyboard state: " << std::endl;
+    // for (int i = 0; i < 16; i++)
+    // {
+    //     std::cout << std::hex << i << std::dec << " " << keyboardState[i] << std::endl;
+    // }
+
     if (runLoop)
     {
-      runCpuCycle(&chip8, &display, keyboardState);
+      // run CPU clock cycle
+      if (chip8.executeInstructionLoop(keyPtr) != 0)
+      {
+        exit(-1);
+      }
+
+      // draw the screen
+      if (chip8.drawFlag)
+      {
+        chip8.drawFlag = false;
+        display.drawWindow(chip8.gfx, chip8.startX, chip8.startY);
+      }
     }
 
     Uint64 end = SDL_GetPerformanceCounter();
@@ -105,9 +108,9 @@ int main(int argc, char **args) {
     timer += elapsedMS;
 
 	  // Cap to 200 FPS, roughly the frame rate of the chip-8
-    if ((6.428f - elapsedMS) > 0)
+    if ((1.428f - elapsedMS) > 0)
     {
-	    SDL_Delay(floor(6.428f - elapsedMS));
+	    SDL_Delay(floor(1.428f - elapsedMS));
     }
 
     // Timers only update on a 60Hrz frequency

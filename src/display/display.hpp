@@ -11,10 +11,12 @@ public:
   display();
   ~display();
 
-  void drawWindow(bool gfx[64 * 32]);
+  void drawWindow(bool gfx[64 * 32], int startX, int startY);
 
   // Handles getting input from SDL2 + Imgui. Gets the CPU emulator for reading debug information.
-  bool inputLoop(unsigned char v[16],
+  bool inputLoop(
+                bool keyboard[16],
+                unsigned char v[16],
                 bool gfx[64 * 32],
                 unsigned short index,
                 unsigned short pc,
@@ -28,6 +30,8 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Rect r;
+
+  bool prevgfx[64 * 32];
 
   // SDL event
   SDL_Event e;

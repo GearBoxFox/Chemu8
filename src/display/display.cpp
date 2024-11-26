@@ -68,7 +68,9 @@ void display::setDebug(bool d)
   debug = d;
 }
 
-bool display::inputLoop(unsigned char v[16],
+bool display::inputLoop(
+                bool keyboard[16],
+                unsigned char v[16],
                 bool gfx[64 * 32],
                 unsigned short index,
                 unsigned short pc,
@@ -91,6 +93,71 @@ bool display::inputLoop(unsigned char v[16],
         // testkeycode
         switch (e.key.keysym.sym)
         {
+          case SDLK_1:
+            keyboard[0x1] = true;
+            break;
+
+          case SDLK_2:
+            keyboard[0x2] = true;
+            break;
+
+          case SDLK_3:
+            keyboard[0x3] = true;
+            break;
+
+          case SDLK_4:
+            keyboard[0xC] = true;
+            break;
+
+          case SDLK_q:
+            keyboard[0x4] = true;
+            break;
+
+          case SDLK_w:
+            keyboard[0x5] = true;
+            break;
+          
+          case SDLK_e:
+            keyboard[0x6] = true;
+            break;
+
+          case SDLK_r:
+            keyboard[0xD] = true;
+            break;
+
+          case SDLK_a:
+            keyboard[0x7] = true;
+            break;
+
+          case SDLK_s:
+            keyboard[0x8] = true;
+            break;
+
+          case SDLK_d:
+            keyboard[0x9] = true;
+            break;
+
+          case SDLK_f:
+            keyboard[0xE] = true;
+            break;
+
+          case SDLK_z:
+            keyboard[0xA] = true;
+            break;
+
+          case SDLK_x:
+            keyboard[0x0] = true;
+            break;
+
+          case SDLK_c:
+            keyboard[0xB] = true;
+            break;
+
+          case SDLK_v:
+            keyboard[0xF] = true;
+            break;
+
+          // debugging keybinds
           case SDLK_0:
             debug = !debug;
             break;
@@ -136,13 +203,82 @@ bool display::inputLoop(unsigned char v[16],
         }
 
         break;
+
+      case SDL_KEYUP:
+        switch (e.key.keysym.sym)
+        {
+          case SDLK_1:
+            keyboard[0x1] = false;
+            break;
+
+          case SDLK_2:
+            keyboard[0x2] = false;
+            break;
+
+          case SDLK_3:
+            keyboard[0x3] = false;
+            break;
+
+          case SDLK_4:
+            keyboard[0xC] = false;
+            break;
+
+          case SDLK_q:
+            keyboard[0x4] = false;
+            break;
+
+          case SDLK_w:
+            keyboard[0x5] = false;
+            break;
+          
+          case SDLK_e:
+            keyboard[0x6] = false;
+            break;
+
+          case SDLK_r:
+            keyboard[0xD] = false;
+            break;
+
+          case SDLK_a:
+            keyboard[0x7] = false;
+            break;
+
+          case SDLK_s:
+            keyboard[0x8] = false;
+            break;
+
+          case SDLK_d:
+            keyboard[0x9] = false;
+            break;
+
+          case SDLK_f:
+            keyboard[0xE] = false;
+            break;
+
+          case SDLK_z:
+            keyboard[0xA] = false;
+            break;
+
+          case SDLK_x:
+            keyboard[0x0] = false;
+            break;
+
+          case SDLK_c:
+            keyboard[0xB] = false;
+            break;
+
+          case SDLK_v:
+            keyboard[0xF] = false;
+            break;
+        }
+        break;
     }
   }
 
   return !debug;
 }
 
-void display::drawWindow(bool gfx[64 * 32])
+void display::drawWindow(bool gfx[64 * 32], int startX, int startY)
 {
   // Start the Dear ImGui frame
   // ImGui_ImplSDLRenderer2_NewFrame();
@@ -161,7 +297,7 @@ void display::drawWindow(bool gfx[64 * 32])
     for (int x = 0; x < 64; x++)
     {
       int rawIndex = x + (y * 64);
-      if (gfx[rawIndex] != 0)
+      if (gfx[rawIndex])
       {
         r.x = x * scale;
         r.y = y * scale;
@@ -172,6 +308,14 @@ void display::drawWindow(bool gfx[64 * 32])
       }
     }
   }
+
+  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+  r.x = startX * scale;
+  r.y = startY * scale;
+  r.h = scale;
+  r.w = scale;
+
+  SDL_RenderFillRect(renderer, &r);
 
   // show the demo window
   // bool show_demo = true;

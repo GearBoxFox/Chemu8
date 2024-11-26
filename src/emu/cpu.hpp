@@ -33,6 +33,10 @@ public:
     cpu(/* args */);
     ~cpu();
 
+    // debugging
+    int startX = 0;
+    int startY = 0;
+
     // chip-8 used a 64x32 monocolor display
     bool gfx[64 * 32];
     bool drawFlag = false;
@@ -50,7 +54,7 @@ public:
     unsigned short opcode;
 
     // runs the basic fetch-decode-execute loop
-    int executeInstructionLoop(const Uint8 *keyboard);
+    int executeInstructionLoop(bool keyboard[16]);
 
     // loads a program into the memory and starts the execution
     void loadRomFile(char* rom, size_t romSize);

@@ -32,7 +32,7 @@ void cpu::loadRomFile(char* rom, size_t romSize)
     }
 }
 
-int cpu::executeInstructionLoop(const Uint8 *keyboard)
+int cpu::executeInstructionLoop(bool keyboard[16])
 {
     // fetch step
     // loads the current program counter into the index 
@@ -65,7 +65,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
             clearScreen();
         } else if (opcode == 0x00EE) {
             // 0x00EE - return from subroutine
-            std::cout << "Returning from subroutine" << std::endl;
+            // std::cout << "Returning from subroutine" << std::endl;
             --stackPointer;
             pc = stack[stackPointer];
         }
@@ -81,7 +81,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
 
     case 0x2:
         // 0x2NNN - call subroutine
-        std::cout << "Seting stack to: " << pc << std::endl;
+        // std::cout << "Seting stack to: " << pc << std::endl;
         stack[stackPointer] = pc;
         stackPointer++;
         pc = 0x0 << 12
@@ -102,7 +102,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
     case 0x4:
         // 0x4XNN - skip if value in register X is NOT equal to NN
         testValue = nibbles[2] << 4 | nibbles[3];
-        std::cout << "Does " << +v[nibbles[1]] << " not equal " << +testValue << std::endl; 
+        // std::cout << "Does " << +v[nibbles[1]] << " not equal " << +testValue << std::endl; 
         if (testValue != v[nibbles[1]])
         {
             pc += 2;
@@ -169,15 +169,15 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
-            std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << std::endl;
+            // std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << std::endl;
 
             if (v[nibbles[1]] >= v[nibbles[2]])
             {
                 v[0xF] = 1;
-                std::cout << "Setting overflow" << std::endl;
+                // std::cout << "Setting overflow" << std::endl;
             } else {
                 v[0xF] = 0;
-                std::cout << "Clearing overflow" << std::endl;
+                // std::cout << "Clearing overflow" << std::endl;
             }
 
             v[nibbles[1]] = result % 256;
@@ -273,17 +273,20 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         // VX - register that holds the X coord
         // VY - register that holds the Y coord
 
-        int xCoord = v[nibbles[1]] % 64; // modulo 64 because the screen is oly 64 pixel long
-        int yCoord = v[nibbles[2]] % 32; // modulo 32 because the screen is oly 32 pixel tall
+        int xCoord = v[nibbles[1]]; // modulo 64 because the screen is oly 64 pixel long
+        int yCoord = v[nibbles[2]]; // modulo 32 because the screen is oly 32 pixel tall
+
+        startX = xCoord;
+        startY = yCoord;
 
         int spriteHeight = nibbles[3];
         unsigned short pixel;
 
-        std::cout << "X, Y: " << 
-        std::hex << xCoord <<
-        std::dec <<  ", " <<
-        std::hex << yCoord << 
-        std::dec << std::endl;
+        // std::cout << "X, Y: " << 
+        // std::hex << xCoord <<
+        // std::dec <<  ", " <<
+        // std::hex << yCoord << 
+        // std::dec << std::endl;
 
         // std::cout << "Sprite height: " << spriteHeight << std::endl;
 
@@ -301,17 +304,17 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
 
                 // error if drawing off screen
                 int xIndex = xCoord + (7 - x);
-                if (xIndex > 64) 
+                if (xIndex >= 64) 
                 {
-                    // std::cout << "Breaking from x overflow" << std::endl;
+                    std::cout << "Breaking from x overflow" << std::endl;
                     break;
                 }
 
                 // error if drawing off screen
                 int yIndex = yCoord + y;
-                if (yIndex > 32) 
+                if (yIndex >= 32) 
                 {
-                    // std::cout << "Breaking from y overflow" << std::endl;
+                    std::cout << "Breaking from y overflow" << std::endl;
                     break;
                 }
 
@@ -323,8 +326,7 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
                 // std::cout << "Current pixel: " << currentPixel << ". New pixel: " << pixel << std::endl;
 
                 // the pixels are drawn by xoring 
-                bool overflow = currentPixel ^ pixel;
-                if (overflow) {
+                if (pixel) {
                     // std::cout << "Pixel drawn!" << std::endl;
                     gfx[rawIndex] = !gfx[rawIndex];
                     v[0xF] = 1;
@@ -339,79 +341,12 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
         // Skip if key - two opcodes here
         // 0xEX9E - Skip if key X is pressed
         // 0xEXA1 - Skip if key X is NOT pressed
-        bool keyPressed;
-        switch (nibbles[1])
-        {
-        case 0x0:
-            keyPressed = keyboard[SDL_SCANCODE_X];
-            break;
 
-        case 0x1:
-            keyPressed = keyboard[SDL_SCANCODE_1];
-            break;
-
-        case 0x2:
-            keyPressed = keyboard[SDL_SCANCODE_2];
-            break;
-
-        case 0x3:
-            keyPressed = keyboard[SDL_SCANCODE_Q];
-            break;
-
-        case 0x4:
-            keyPressed = keyboard[SDL_SCANCODE_W];
-            break;
-
-        case 0x5:
-            keyPressed = keyboard[SDL_SCANCODE_E];
-            break;
-        
-        case 0x6:
-            keyPressed = keyboard[SDL_SCANCODE_A];
-            break;
-
-        case 0x7:
-            keyPressed = keyboard[SDL_SCANCODE_S];
-            break;
-
-        case 0x8:
-            keyPressed = keyboard[SDL_SCANCODE_D];
-            break;
-
-        case 0x9:
-            keyPressed = keyboard[SDL_SCANCODE_Z];
-            break;
-
-        case 0xA:
-            keyPressed = keyboard[SDL_SCANCODE_Z];
-            break;
-
-        case 0xB:
-            keyPressed = keyboard[SDL_SCANCODE_C];
-            break;
-
-        case 0xC:
-            keyPressed = keyboard[SDL_SCANCODE_4];
-            break;
-
-        case 0xD:
-            keyPressed = keyboard[SDL_SCANCODE_R];
-            break;
-
-        case 0xE:
-            keyPressed = keyboard[SDL_SCANCODE_F];
-            break;
-
-        case 0xF:
-            keyPressed = keyboard[SDL_SCANCODE_V];
-            break;
-        }
-
-        if (nibbles[3] == 0xE && keyPressed)
+        if (nibbles[3] == 0xE && keyboard[v[nibbles[1]]])
         {
             // Skip if key
             pc += 2;
-        } else if (nibbles[3] == 0x1 && !keyPressed) {
+        } else if (nibbles[3] == 0x1 && !keyboard[v[nibbles[1]]]) {
             // Skip if not key
             pc += 2;
         }
@@ -434,14 +369,9 @@ int cpu::executeInstructionLoop(const Uint8 *keyboard)
             // and stores it at I, I + 1, I + 2.
             // vX = 152, I = 100, I + 1 = 50, I + 2 = 2
 
-            // copy into a temp value
-            testValue = v[nibbles[1]];
-
-            for (int i = 0; i < 3; i++)
-            {
-                mem.setAdress(index + i, testValue % 10);
-                testValue = testValue / 10;
-            }
+            mem.setAdress(index, v[(opcode & 0x0F00) >> 8] / 100);
+            mem.setAdress(index + 1, (v[(opcode & 0x0F00) >> 8] / 10) % 10);
+            mem.setAdress(index + 2, (v[(opcode & 0x0F00) >> 8] % 100) % 10);
             
 
         case 0x55:
