@@ -169,7 +169,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
-            std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << std::endl;
+            std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << " = " << result << std::endl;
 
             if (v[nibbles[1]] < v[nibbles[2]])
             {
@@ -180,7 +180,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 std::cout << "Didn't borrow" << std::endl;
             }
 
-            v[nibbles[1]] = result;
+            v[nibbles[1]] = result % 256;
             break;
 
             // if(v[(opcode & 0x00F0) >> 4] > v[(opcode & 0x0F00) >> 8]) 
@@ -210,6 +210,8 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x7:
             // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
             result = v[nibbles[2]] - v[nibbles[1]];
+            std::cout << "Subtracting " << +v[nibbles[2]] << " - " << +v[nibbles[1]] << " = " << result << std::endl;
+
 
             if (v[nibbles[2]] < v[nibbles[1]])
             {
@@ -220,7 +222,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 std::cout << "Didn't borrow" << std::endl;
             }
 
-            v[nibbles[1]] = result;
+            v[nibbles[1]] = result % 256;
             break;
 
         case 0xE:
