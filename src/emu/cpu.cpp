@@ -42,7 +42,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
     pc += 2;
     // decode + execute
     // chip-8 has fairly a simple execute stage, so we can merge the two steps
-    std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
+    // std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
 
     // chip-8 uses half-unsigned chars or "nibbles"
     int nibbles[4] = 
@@ -169,19 +169,26 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
-            // std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << std::endl;
+            std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << std::endl;
 
-            if (v[nibbles[1]] >= v[nibbles[2]])
+            if (v[nibbles[1]] < v[nibbles[2]])
             {
-                v[0xF] = 1;
-                // std::cout << "Setting overflow" << std::endl;
-            } else {
                 v[0xF] = 0;
-                // std::cout << "Clearing overflow" << std::endl;
+                std::cout << "Borrowed" << std::endl;
+            } else {
+                v[0xF] = 1;
+                std::cout << "Didn't borrow" << std::endl;
             }
 
-            v[nibbles[1]] = result % 256;
+            v[nibbles[1]] = result;
             break;
+
+            // if(v[(opcode & 0x00F0) >> 4] > v[(opcode & 0x0F00) >> 8]) 
+            //     v[0xF] = 0; // there is a borrow
+            // else 
+            //     v[0xF] = 1;					
+            // v[(opcode & 0x0F00) >> 8] -= v[(opcode & 0x00F0) >> 4];
+        break;
 
         case 0x6:
             // 0x8XY6 - vX is set to vY >> 1. RIGHT shift
@@ -204,31 +211,28 @@ int cpu::executeInstructionLoop(bool keyboard[16])
             // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
             result = v[nibbles[2]] - v[nibbles[1]];
 
-            if (v[nibbles[2]] >= v[nibbles[1]])
+            if (v[nibbles[2]] < v[nibbles[1]])
             {
-                v[0xF] = 1;
-            } else {
                 v[0xF] = 0;
+                std::cout << "Borrowed" << std::endl;
+            } else {
+                v[0xF] = 1;
+                std::cout << "Didn't borrow" << std::endl;
             }
 
-            v[nibbles[1]] = result % 256;
+            v[nibbles[1]] = result;
             break;
 
         case 0xE:
             // 0x8XY6 - vX is set to vY << 1. LEFT shift
             testValue = v[nibbles[1]];
+            // vF is set to the bit that was shifted out
+            testValue = v[nibbles[1]] >> 7;
             v[nibbles[1]] = v[nibbles[2]] << 1;
+            v[0xF] = testValue;
 
             // TODO make toggle for modern versions
             // modern chip-8 sets vX to vX << 1
-
-            // vF is set to the bit that was shifted out
-            if (testValue & 0xF != 0)
-            {
-                v[0xF] = 1;
-            } else {
-                v[0xF] = 0;
-            }
             break;
 
         default:
@@ -291,6 +295,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         // std::cout << "Sprite height: " << spriteHeight << std::endl;
 
         // draw top->bottom
+        v[0xF] = 0;
         for (int y = 0; y < spriteHeight; y++)
         {
             // get the row for the sprite
@@ -306,7 +311,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 int xIndex = xCoord + (7 - x);
                 if (xIndex >= 64) 
                 {
-                    std::cout << "Breaking from x overflow" << std::endl;
+                    // std::cout << "Breaking from x overflow" << std::endl;
                     break;
                 }
 
@@ -314,7 +319,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 int yIndex = yCoord + y;
                 if (yIndex >= 32) 
                 {
-                    std::cout << "Breaking from y overflow" << std::endl;
+                    // std::cout << "Breaking from y overflow" << std::endl;
                     break;
                 }
 
@@ -362,6 +367,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x1E:
             // 0xFX1E - Index += vX
             index += v[nibbles[1]];
+            v[0xF] = (index & 0xF000) >> 12;
             break;
 
         case 0x33:

@@ -309,14 +309,6 @@ void display::drawWindow(bool gfx[64 * 32], int startX, int startY)
     }
   }
 
-  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-  r.x = startX * scale;
-  r.y = startY * scale;
-  r.h = scale;
-  r.w = scale;
-
-  SDL_RenderFillRect(renderer, &r);
-
   // show the demo window
   // bool show_demo = true;
   // ImGui::ShowDemoWindow(&show_demo);
