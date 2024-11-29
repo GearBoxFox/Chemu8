@@ -84,32 +84,15 @@ clean: src/display/clean
 
 # Recursive "all" directory target.
 src/display/all: src/display/CMakeFiles/Display.dir/all
-src/display/all: src/display/imgui/all
 .PHONY : src/display/all
 
 # Recursive "preinstall" directory target.
-src/display/preinstall: src/display/imgui/preinstall
+src/display/preinstall:
 .PHONY : src/display/preinstall
 
 # Recursive "clean" directory target.
 src/display/clean: src/display/CMakeFiles/Display.dir/clean
-src/display/clean: src/display/imgui/clean
 .PHONY : src/display/clean
-
-#=============================================================================
-# Directory level rules for directory src/display/imgui
-
-# Recursive "all" directory target.
-src/display/imgui/all: src/display/imgui/CMakeFiles/imgui.dir/all
-.PHONY : src/display/imgui/all
-
-# Recursive "preinstall" directory target.
-src/display/imgui/preinstall:
-.PHONY : src/display/imgui/preinstall
-
-# Recursive "clean" directory target.
-src/display/imgui/clean: src/display/imgui/CMakeFiles/imgui.dir/clean
-.PHONY : src/display/imgui/clean
 
 #=============================================================================
 # Directory level rules for directory src/emu
@@ -132,7 +115,6 @@ src/emu/clean: src/emu/CMakeFiles/Emu.dir/clean
 # All Build rule for target.
 CMakeFiles/chemu8.dir/all: src/emu/CMakeFiles/Emu.dir/all
 CMakeFiles/chemu8.dir/all: src/display/CMakeFiles/Display.dir/all
-CMakeFiles/chemu8.dir/all: src/display/imgui/CMakeFiles/imgui.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chemu8.dir/build.make CMakeFiles/chemu8.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=6,7 "Built target chemu8"
@@ -140,7 +122,7 @@ CMakeFiles/chemu8.dir/all: src/display/imgui/CMakeFiles/imgui.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chemu8.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/chemu8.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 0
 .PHONY : CMakeFiles/chemu8.dir/rule
@@ -184,7 +166,7 @@ src/emu/CMakeFiles/Emu.dir/clean:
 # Target rules for target src/display/CMakeFiles/Display.dir
 
 # All Build rule for target.
-src/display/CMakeFiles/Display.dir/all: src/display/imgui/CMakeFiles/imgui.dir/all
+src/display/CMakeFiles/Display.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/Display.dir/build.make src/display/CMakeFiles/Display.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/Display.dir/build.make src/display/CMakeFiles/Display.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=1,2 "Built target Display"
@@ -192,7 +174,7 @@ src/display/CMakeFiles/Display.dir/all: src/display/imgui/CMakeFiles/imgui.dir/a
 
 # Build rule for subdir invocation for target.
 src/display/CMakeFiles/Display.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/CMakeFiles/Display.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 0
 .PHONY : src/display/CMakeFiles/Display.dir/rule
@@ -205,32 +187,6 @@ Display: src/display/CMakeFiles/Display.dir/rule
 src/display/CMakeFiles/Display.dir/clean:
 	$(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/Display.dir/build.make src/display/CMakeFiles/Display.dir/clean
 .PHONY : src/display/CMakeFiles/Display.dir/clean
-
-#=============================================================================
-# Target rules for target src/display/imgui/CMakeFiles/imgui.dir
-
-# All Build rule for target.
-src/display/imgui/CMakeFiles/imgui.dir/all:
-	$(MAKE) $(MAKESILENT) -f src/display/imgui/CMakeFiles/imgui.dir/build.make src/display/imgui/CMakeFiles/imgui.dir/depend
-	$(MAKE) $(MAKESILENT) -f src/display/imgui/CMakeFiles/imgui.dir/build.make src/display/imgui/CMakeFiles/imgui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15 "Built target imgui"
-.PHONY : src/display/imgui/CMakeFiles/imgui.dir/all
-
-# Build rule for subdir invocation for target.
-src/display/imgui/CMakeFiles/imgui.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 8
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/imgui/CMakeFiles/imgui.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles 0
-.PHONY : src/display/imgui/CMakeFiles/imgui.dir/rule
-
-# Convenience name for target.
-imgui: src/display/imgui/CMakeFiles/imgui.dir/rule
-.PHONY : imgui
-
-# clean rule for target.
-src/display/imgui/CMakeFiles/imgui.dir/clean:
-	$(MAKE) $(MAKESILENT) -f src/display/imgui/CMakeFiles/imgui.dir/build.make src/display/imgui/CMakeFiles/imgui.dir/clean
-.PHONY : src/display/imgui/CMakeFiles/imgui.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

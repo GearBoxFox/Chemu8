@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/chemu8.dir/src/main.cpp.o -o bin/chemu8  -lSDL2main -lSDL2 src/emu/libEmu.a src/display/libDisplay.a -lOpenGL src/display/imgui/libimgui.a -lSDL2main -lSDL2 
+/home/rowanfoxx/.emsdk/upstream/emscripten/em++  -Wall -Wextra -s USE_SDL=2 -g  -s USE_SDL=2 @CMakeFiles/chemu8.dir/objects1.rsp -o bin/chemu8.html @CMakeFiles/chemu8.dir/linklibs.rsp

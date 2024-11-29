@@ -8,11 +8,14 @@
 #include <emscripten.h>
 #endif
 
-static void  mainloop(
-    cpu chip, 
-    display dis,
-    bool keyboard[16],
-    bool *keyPtr)
+// The Chemu8 Emulator
+cpu chip8;
+display display;
+
+bool keyboardState[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+bool *keyPtr = keyboardState;
+
+static void  mainloop()
 {
   bool runLoop = false;
 
@@ -23,14 +26,14 @@ static void  mainloop(
   {
     
     // let the cpu run faster
-    runLoop = dis.inputLoop(
+    runLoop = display.inputLoop(
       keyPtr,
-      chip.v,
-      chip.gfx,
-      chip.index,
-      chip.pc,
-      chip.stackPointer,
-      chip.opcode);
+      chip8.v,
+      chip8.gfx,
+      chip8.index,
+      chip8.pc,
+      chip8.stackPointer,
+      chip8.opcode);
 
     // std::cout << "Current keyboard state: " << std::endl;
     // for (int i = 0; i < 16; i++)
@@ -41,16 +44,20 @@ static void  mainloop(
     if (runLoop)
     {
       // run CPU clock cycle
-      if (chip.executeInstructionLoop(keyPtr) != 0)
+      if (chip8.executeInstructionLoop(keyPtr) != 0)
       {
+        #ifdef __EMSCRIPTEN__
+        emscripten_cancel_main_loop();  /* this should "kill" the app. */
+        #else
         exit(-1);
+        #endif
       }
     }
   }
 
-  if (runLoop && chip.drawFlag)
+  if (runLoop && chip8.drawFlag)
   {
-    dis.drawWindow(chip.gfx, chip.startX, chip.startY);
+    display.drawWindow(chip8.gfx, chip8.startX, chip8.startY);
   }
 
 
@@ -68,7 +75,7 @@ static void  mainloop(
     // timer += elapsedMS;
   }
 
-  chip.updateTimers();
+  chip8.updateTimers();
 
   // // // Timers only update on a 60Hrz frequency
   // // std::cout << "Elapsed Timer" << elapsedMS << std::endl;
@@ -83,10 +90,6 @@ static void  mainloop(
 // You must include the command line parameters for your main function to be
 // recognized by SDL
 int main(int argc, char **args) {
-  // The Chemu8 Emulator
-  cpu chip8;
-  display display;
-
   float timer = 0.0;
 
   // the first argument should be the ROM file to load
@@ -139,12 +142,13 @@ int main(int argc, char **args) {
   bool debug = (args[2] != NULL);
   display.setDebug(debug);
 
-  bool keyboardState[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-  bool *keyPtr = keyboardState;
-
+  #ifdef __EMSCRIPTEN__
+  emscripten_set_main_loop(mainloop, 0, 1);
+  #else
   while (true) {
-    mainloop(chip8, display, keyboardState, keyPtr);
+    mainloop();
   }
+  #endif
 
   // End the program, but should never get here
   return 0;

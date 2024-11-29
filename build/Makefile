@@ -155,19 +155,6 @@ Display/fast:
 	$(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/Display.dir/build.make src/display/CMakeFiles/Display.dir/build
 .PHONY : Display/fast
 
-#=============================================================================
-# Target rules for targets named imgui
-
-# Build rule for target.
-imgui: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui
-.PHONY : imgui
-
-# fast build rule for target.
-imgui/fast:
-	$(MAKE) $(MAKESILENT) -f src/display/imgui/CMakeFiles/imgui.dir/build.make src/display/imgui/CMakeFiles/imgui.dir/build
-.PHONY : imgui/fast
-
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -203,7 +190,6 @@ help:
 	@echo "... Display"
 	@echo "... Emu"
 	@echo "... chemu8"
-	@echo "... imgui"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
