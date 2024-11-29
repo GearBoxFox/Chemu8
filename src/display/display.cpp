@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 display::display() {
-  if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+  if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
     std::exit(-1);
   }
@@ -354,7 +354,7 @@ bool display::preloadScreen(void (*funcptr)(char*))
   if (!preloadedScreenDrawn)
   {
     TTF_Font* font;
-    font = TTF_OpenFont("assets/UbuntuNerdFont-Medium.ttf", 24);
+    font = TTF_OpenFont("./assets/UbuntuNerdFont-Medium.ttf", 24);
     if (!font) {
       std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
     }

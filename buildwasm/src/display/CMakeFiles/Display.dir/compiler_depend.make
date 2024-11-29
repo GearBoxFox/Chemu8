@@ -263,6 +263,7 @@ src/display/CMakeFiles/Display.dir/display.cpp.o: ../src/display/display.cpp \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_version.h \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_locale.h \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_misc.h \
+  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_ttf.h \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iostream \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ios \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__fwd/ios.h \
@@ -1311,6 +1312,8 @@ src/display/CMakeFiles/Display.dir/display.cpp.o: ../src/display/display.cpp \
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/counted_iterator.h:
 
+/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__variant/monostate.h:
+
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_shape.h:
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_power.h:
@@ -2071,6 +2074,10 @@ src/display/CMakeFiles/Display.dir/display.cpp.o: ../src/display/display.cpp \
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_locale.h:
 
+/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_ttf.h:
+
+/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/common_iterator.h:
+
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iostream:
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cstddef:
@@ -2537,8 +2544,6 @@ src/display/CMakeFiles/Display.dir/display.cpp.o: ../src/display/display.cpp \
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__fwd/string_view.h:
 
-/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__variant/monostate.h:
-
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/in_found_result.h:
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/data.h:
@@ -2626,7 +2631,5 @@ src/display/CMakeFiles/Display.dir/display.cpp.o: ../src/display/display.cpp \
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iterator:
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/back_insert_iterator.h:
-
-/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/common_iterator.h:
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/variant:

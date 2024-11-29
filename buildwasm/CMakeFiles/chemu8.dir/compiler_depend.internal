@@ -881,6 +881,7 @@ CMakeFiles/chemu8.dir/src/main.cpp.o
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_misc.h
  /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.hpp
  /home/rowanfoxx/Documents/github/Chemu8/src/display/display.hpp
+ /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_ttf.h
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten/emscripten.h
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten/em_asm.h

@@ -191,6 +191,9 @@ EMSCRIPTEN_FORCE_COMPILERS:BOOL=ON
 // If disabled (default), UNIX ar archives (.a) are generated.
 EMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES:BOOL=OFF
 
+//The directory containing a CMake configuration file for SDL2.
+SDL2_DIR:PATH=/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/lib/cmake/SDL2
+
 //Value Computed by CMake
 chemu8_BINARY_DIR:STATIC=/home/rowanfoxx/Documents/github/Chemu8/buildwasm
 

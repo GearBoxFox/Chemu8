@@ -1,1 +1,1 @@
-/home/rowanfoxx/.emsdk/upstream/emscripten/em++  -Wall -Wextra -s USE_SDL=2 --preload-file ../src/roms -g  -s USE_SDL=2 --preload-file ../src/roms @CMakeFiles/chemu8.dir/objects1.rsp -o bin/chemu8.html @CMakeFiles/chemu8.dir/linklibs.rsp
+/home/rowanfoxx/.emsdk/upstream/emscripten/em++  -Wall -Wextra -s USE_SDL=2 -s USE_SDL_TTF=2 --embed-file ./assets -g  -s USE_SDL=2 -s USE_SDL_TTF=2 --embed-file ./assets @CMakeFiles/chemu8.dir/objects1.rsp -o bin/chemu8.html @CMakeFiles/chemu8.dir/linklibs.rsp

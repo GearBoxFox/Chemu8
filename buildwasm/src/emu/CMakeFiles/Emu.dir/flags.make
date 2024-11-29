@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGS =  -Wall -Wextra -s USE_SDL=2 --preload-file ../src/roms -g -std=gnu++20
+CXX_FLAGS =  -Wall -Wextra -s USE_SDL=2 -s USE_SDL_TTF=2 --embed-file ./assets -g -std=gnu++20
 

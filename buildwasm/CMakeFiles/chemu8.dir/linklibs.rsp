@@ -1,1 +1,1 @@
- -lSDL2 src/emu/libEmu.a src/display/libDisplay.a -lSDL2 
+ -lSDL2 src/emu/libEmu.a src/display/libDisplay.a -lSDL2 -sUSE_SDL=2 -lSDL2_ttf 

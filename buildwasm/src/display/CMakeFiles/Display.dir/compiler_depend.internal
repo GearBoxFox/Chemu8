@@ -264,6 +264,7 @@ src/display/CMakeFiles/Display.dir/display.cpp.o
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_version.h
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_locale.h
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_misc.h
+ /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_ttf.h
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iostream
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ios
  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__fwd/ios.h

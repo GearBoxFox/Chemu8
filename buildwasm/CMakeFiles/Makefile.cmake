@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+  "/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/lib/cmake/SDL2/sdl2-config.cmake"
   "/home/rowanfoxx/.emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
   "../CMakeLists.txt"
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"

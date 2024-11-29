@@ -880,6 +880,7 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_misc.h \
   ../src/emu/memory.hpp \
   ../src/display/display.hpp \
+  /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_ttf.h \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten/emscripten.h \
   /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten/em_asm.h \
@@ -905,6 +906,8 @@ CMakeFiles/chemu8.dir/src/main.cpp.o: ../src/main.cpp \
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stdbool.h:
 
 /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/emscripten/em_asm.h:
+
+/home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_ttf.h:
 
 ../src/emu/memory.hpp:
 

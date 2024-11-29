@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/chemu8.dir/includes_CXX.rsp
 
-CXX_FLAGS =  -Wall -Wextra -s USE_SDL=2 --preload-file ../src/roms -g -std=gnu++20
+CXX_FLAGS =  -Wall -Wextra -s USE_SDL=2 -s USE_SDL_TTF=2 --embed-file ./assets -g -sUSE_SDL=2 -std=gnu++20
 
