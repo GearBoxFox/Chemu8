@@ -15,6 +15,7 @@ cpu::cpu(/* args */)
     for (int i = 0; i < 16; i++)
     {
         v[i] = 0x0;
+        keyCopy[i] = false;
     }
 
     srand(time(0));
@@ -55,6 +56,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
 
     unsigned char testValue;
     int result;
+    bool keyReleased;
 
     switch (nibbles[0])
     {
@@ -140,16 +142,19 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x1:
             // 0x8XY1 - vX is set to the binary OR of vX and vY
             v[nibbles[1]] = v[nibbles[1]] | v[nibbles[2]];
+            v[0xF] = 0;
             break;
 
         case 0x2:
             // 0x8XY2 - vX is set to the binary AND of vX and vY
             v[nibbles[1]] = v[nibbles[1]] & v[nibbles[2]];
+            v[0xF] = 0;
             break;
 
         case 0x3:
             // 08XY3 - vX is set to the logical XOR of vX and vY
             v[nibbles[1]] = v[nibbles[1]] ^ v[nibbles[2]];
+            v[0xF] = 0;
             break;
 
         case 0x4:
@@ -310,7 +315,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 bool pixel = row & (0x01 << x);
 
                 // error if drawing off screen
-                int xIndex = xCoord + (7 - x);
+                int xIndex = (xCoord + (7 - x));
                 if (xIndex >= 64) 
                 {
                     // std::cout << "Breaking from x overflow" << std::endl;
@@ -318,7 +323,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 }
 
                 // error if drawing off screen
-                int yIndex = yCoord + y;
+                int yIndex = (yCoord + y);
                 if (yIndex >= 32) 
                 {
                     // std::cout << "Breaking from y overflow" << std::endl;
@@ -366,45 +371,91 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         result = nibbles[2] << 4 | nibbles[3];
         switch (result)
         {
-        case 0x1E:
-            // 0xFX1E - Index += vX
-            index += v[nibbles[1]];
-            v[0xF] = (index & 0xF000) >> 12;
-            break;
+            case 0x07:
+                // 0xFX07 - Read the delay timer into vX
+                v[nibbles[1]] = delay_timer;
+                break;
 
-        case 0x33:
-            // 0xFX33 - splits the number at vX into three parts of a decimal number,
-            // and stores it at I, I + 1, I + 2.
-            // vX = 152, I = 100, I + 1 = 50, I + 2 = 2
+            case 0x0A:
+                // 0xFX0A - Wait until key pressed and released
+                {
+					bool keyPress = false;
 
-            mem.setAdress(index, v[(opcode & 0x0F00) >> 8] / 100);
-            mem.setAdress(index + 1, (v[(opcode & 0x0F00) >> 8] / 10) % 10);
-            mem.setAdress(index + 2, (v[(opcode & 0x0F00) >> 8] % 100) % 10);
+					for(int i = 0; i < 16; ++i)
+					{
+						if(keyboard[i] != 0)
+						{
+							keyCopy[i] = true;
+						}
+
+                        if (keyCopy[i] == true && keyboard[i] == false)
+                        {
+                            v[(opcode & 0x0F00) >> 8] = i;
+							keyPress = true;
+                        }
+					}
+
+					// If we didn't received a keypress, skip this cycle and try again.
+					if(!keyPress)
+                    {						
+						pc -= 2;
+                    }					
+				}
+                break;
             
+            case 0x15:
+                // 0xFX15 - Set delay timer to vX
+                std::cout << "Setting Delay Timer" << std::endl;
+                delay_timer = v[nibbles[1]];
+                break;
 
-        case 0x55:
-            // 0xFX55 - store v0-vX in memory starting at Index
-            // the original chip-8 incremented the index, modern don't
-            // TODO add debug feature later for a toggle
-            for (int i = 0; i < nibbles[1] + 1; i++)
-            {
-                mem.setAdress(index + i, v[i]);
-            }
-            break;
-
-        case 0x65:
-            // 0xFX55 - store v0-vX in memory starting at Index
-            // the original chip-8 incremented the index, modern don't
-            // TODO add debug feature later for a toggle
-            for (int i = 0; i < nibbles[1] + 1; i++)
-            {
-                v[i] = mem.getAdress(index++);
-            }
-            break;
+            case 0x18:
+                // 0xFX18 - Set sound timer to vX
+                std::cout << "Setting Sound Timer" << std::endl;
+                sound_timer = v[nibbles[1]];
+                break;
             
-        
-        default:
-            break;
+            case 0x1E:
+                // 0xFX1E - Index += vX
+                index += v[nibbles[1]];
+                v[0xF] = (index & 0xF000) >> 12;
+                break;
+
+            case 0x33:
+                // 0xFX33 - splits the number at vX into three parts of a decimal number,
+                // and stores it at I, I + 1, I + 2.
+                // vX = 152, I = 100, I + 1 = 50, I + 2 = 2
+
+                mem.setAdress(index, v[(opcode & 0x0F00) >> 8] / 100);
+                mem.setAdress(index + 1, (v[(opcode & 0x0F00) >> 8] / 10) % 10);
+                mem.setAdress(index + 2, (v[(opcode & 0x0F00) >> 8] % 100) % 10);
+                
+
+            case 0x55:
+                // 0xFX55 - store v0-vX in memory starting at Index
+                // the original chip-8 incremented the index, modern don't
+                // TODO add debug feature later for a toggle
+                for (int i = 0; i < nibbles[1] + 1; i++)
+                {
+                    mem.setAdress(index, v[i]);
+                    index++;
+                }
+                break;
+
+            case 0x65:
+                // 0xFX55 - store v0-vX in memory starting at Index
+                // the original chip-8 incremented the index, modern don't
+                // TODO add debug feature later for a toggle
+                for (int i = 0; i < nibbles[1] + 1; i++)
+                {
+                    v[i] = mem.getAdress(index);
+                    index++;
+                }
+                break;
+                
+            
+            default:
+                break;
         }
         break;
 
@@ -422,11 +473,13 @@ bool cpu::updateTimers()
     if (delay_timer > 0)
     {
         delay_timer--;
+        std::cout << "Delay Timer: " << +delay_timer << std::endl;
     }
 
     if (sound_timer > 0)
     {
         sound_timer--;
+        std::cout << "Sound Timer: " << +sound_timer << std::endl;
         return true;
     }
 

@@ -27,6 +27,9 @@ private:
     unsigned char delay_timer;
     unsigned char sound_timer;
 
+    // keyboard copy for 0xFX0A instruction
+    bool keyCopy[16];
+
     // clears the screen
     void clearScreen();
 public:
