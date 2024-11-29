@@ -73,29 +73,29 @@ src/emu/CMakeFiles/Emu.dir/cpu.cpp.o: src/emu/CMakeFiles/Emu.dir/flags.make
 src/emu/CMakeFiles/Emu.dir/cpu.cpp.o: ../src/emu/cpu.cpp
 src/emu/CMakeFiles/Emu.dir/cpu.cpp.o: src/emu/CMakeFiles/Emu.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/emu/CMakeFiles/Emu.dir/cpu.cpp.o"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/emu/CMakeFiles/Emu.dir/cpu.cpp.o -MF CMakeFiles/Emu.dir/cpu.cpp.o.d -o CMakeFiles/Emu.dir/cpu.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/emu/CMakeFiles/Emu.dir/cpu.cpp.o -MF CMakeFiles/Emu.dir/cpu.cpp.o.d -o CMakeFiles/Emu.dir/cpu.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp
 
 src/emu/CMakeFiles/Emu.dir/cpu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Emu.dir/cpu.cpp.i"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp > CMakeFiles/Emu.dir/cpu.cpp.i
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp > CMakeFiles/Emu.dir/cpu.cpp.i
 
 src/emu/CMakeFiles/Emu.dir/cpu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Emu.dir/cpu.cpp.s"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp -o CMakeFiles/Emu.dir/cpu.cpp.s
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/emu/cpu.cpp -o CMakeFiles/Emu.dir/cpu.cpp.s
 
 src/emu/CMakeFiles/Emu.dir/memory.cpp.o: src/emu/CMakeFiles/Emu.dir/flags.make
 src/emu/CMakeFiles/Emu.dir/memory.cpp.o: ../src/emu/memory.cpp
 src/emu/CMakeFiles/Emu.dir/memory.cpp.o: src/emu/CMakeFiles/Emu.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/emu/CMakeFiles/Emu.dir/memory.cpp.o"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/emu/CMakeFiles/Emu.dir/memory.cpp.o -MF CMakeFiles/Emu.dir/memory.cpp.o.d -o CMakeFiles/Emu.dir/memory.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/emu/CMakeFiles/Emu.dir/memory.cpp.o -MF CMakeFiles/Emu.dir/memory.cpp.o.d -o CMakeFiles/Emu.dir/memory.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp
 
 src/emu/CMakeFiles/Emu.dir/memory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Emu.dir/memory.cpp.i"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp > CMakeFiles/Emu.dir/memory.cpp.i
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp > CMakeFiles/Emu.dir/memory.cpp.i
 
 src/emu/CMakeFiles/Emu.dir/memory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Emu.dir/memory.cpp.s"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp -o CMakeFiles/Emu.dir/memory.cpp.s
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/emu && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/emu/memory.cpp -o CMakeFiles/Emu.dir/memory.cpp.s
 
 # Object files for target Emu
 Emu_OBJECTS = \

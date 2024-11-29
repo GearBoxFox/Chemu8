@@ -73,15 +73,15 @@ src/display/CMakeFiles/Display.dir/display.cpp.o: src/display/CMakeFiles/Display
 src/display/CMakeFiles/Display.dir/display.cpp.o: ../src/display/display.cpp
 src/display/CMakeFiles/Display.dir/display.cpp.o: src/display/CMakeFiles/Display.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rowanfoxx/Documents/github/Chemu8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/display/CMakeFiles/Display.dir/display.cpp.o"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/display && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/display/CMakeFiles/Display.dir/display.cpp.o -MF CMakeFiles/Display.dir/display.cpp.o.d -o CMakeFiles/Display.dir/display.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/display && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/display/CMakeFiles/Display.dir/display.cpp.o -MF CMakeFiles/Display.dir/display.cpp.o.d -o CMakeFiles/Display.dir/display.cpp.o -c /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp
 
 src/display/CMakeFiles/Display.dir/display.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Display.dir/display.cpp.i"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/display && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp > CMakeFiles/Display.dir/display.cpp.i
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/display && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp > CMakeFiles/Display.dir/display.cpp.i
 
 src/display/CMakeFiles/Display.dir/display.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Display.dir/display.cpp.s"
-	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/display && /home/rowanfoxx/.emsdk/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp -o CMakeFiles/Display.dir/display.cpp.s
+	cd /home/rowanfoxx/Documents/github/Chemu8/build/src/display && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rowanfoxx/Documents/github/Chemu8/src/display/display.cpp -o CMakeFiles/Display.dir/display.cpp.s
 
 # Object files for target Display
 Display_OBJECTS = \

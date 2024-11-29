@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
+#include <stdio.h>
 
 class display {
 public:
@@ -22,12 +24,16 @@ public:
 
   void setDebug(bool d);
 
+  bool preloadScreen(void (*funcptr)(char*));
+
 private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Rect r;
 
   bool prevgfx[64 * 32];
+
+  bool preloadedScreenDrawn = false;
 
   // SDL event
   SDL_Event e;

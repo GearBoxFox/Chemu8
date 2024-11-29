@@ -43,7 +43,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
     pc += 2;
     // decode + execute
     // chip-8 has fairly a simple execute stage, so we can merge the two steps
-    std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
+    // std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
 
     // chip-8 uses half-unsigned chars or "nibbles"
     int nibbles[4] = 
@@ -507,13 +507,13 @@ bool cpu::updateTimers()
     if (delay_timer > 0)
     {
         delay_timer--;
-        std::cout << "Delay Timer: " << +delay_timer << std::endl;
+        // std::cout << "Delay Timer: " << +delay_timer << std::endl;
     }
 
     if (sound_timer > 0)
     {
         sound_timer--;
-        std::cout << "Sound Timer: " << +sound_timer << std::endl;
+        // std::cout << "Sound Timer: " << +sound_timer << std::endl;
         return true;
     }
 

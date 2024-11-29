@@ -1,2 +1,2 @@
-/home/rowanfoxx/.emsdk/upstream/emscripten/emar qc libDisplay.a CMakeFiles/Display.dir/display.cpp.o
-/home/rowanfoxx/.emsdk/upstream/emscripten/emranlib libDisplay.a
+/usr/bin/ar qc libDisplay.a CMakeFiles/Display.dir/display.cpp.o
+/usr/bin/ranlib libDisplay.a

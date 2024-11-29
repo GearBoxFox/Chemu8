@@ -9,6 +9,10 @@ display::display() {
     std::exit(-1);
   }
 
+  if ( TTF_Init() < 0 ) {
+    std::cout << "Error initializing SDL_ttf: " << TTF_GetError() << std::endl;
+  }
+
   window =
       SDL_CreateWindow("Chemu8", SDL_WINDOWPOS_UNDEFINED,
                        SDL_WINDOWPOS_UNDEFINED, 64 * scale, 32 * scale, SDL_WINDOW_SHOWN);
@@ -342,6 +346,83 @@ void display::drawWindow(bool gfx[64 * 32], int startX, int startY)
 
   // draw window
   SDL_RenderPresent(renderer);
+}
+
+bool display::preloadScreen(void (*funcptr)(char*))
+{
+  // draw input screen
+  if (!preloadedScreenDrawn)
+  {
+    TTF_Font* font;
+    font = TTF_OpenFont("assets/UbuntuNerdFont-Medium.ttf", 24);
+    if (!font) {
+      std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
+    }
+
+    SDL_Surface *text;
+    SDL_Color color = {255, 255, 255};
+
+    const char *message = "Press a key to select a ROM File: \n \n 1. IBM Logo\n 2. Octojam 2nd Title Screen\n 3. Pong\n 4. Mini Lights Out";
+
+    text = TTF_RenderText_Blended_Wrapped(font, message, color, 0);
+    if (!text) {
+      std::cout << "Failed to render text: " << TTF_GetError() << std::endl;
+    }
+
+    SDL_Texture* text_texture;
+
+    text_texture = SDL_CreateTextureFromSurface(renderer, text);
+
+    SDL_Rect dest = { 0, 0, text->w, text->h };
+
+    SDL_RenderCopy(renderer, text_texture, NULL, &dest);
+    SDL_RenderPresent(renderer);
+
+    preloadedScreenDrawn = true;
+  }
+
+  SDL_Event e;
+  while (SDL_PollEvent(&e) != 0)
+  {
+    switch (e.type)
+    {
+      case SDL_QUIT:
+        exit(0);
+        break;
+
+      case SDL_KEYDOWN:
+        switch (e.key.keysym.sym)
+        {
+        case SDLK_1:
+          funcptr("assets/roms/IBMLogo.ch8");
+          return true;
+          break;
+
+        case SDLK_2:
+          funcptr("assets/roms/octojam2title.ch8");
+          return true;
+          break;
+
+        case SDLK_3:
+          funcptr("assets/roms/pong.ch8");
+          return true;
+          break;
+
+        case SDLK_4:
+          funcptr("assets/roms/mini-lights-out.ch8");
+          return true;
+          break;
+        
+        default:
+          break;
+        }
+      
+      default:
+        break;
+    }
+  }
+
+  return false;
 }
 
 display::~display() {
