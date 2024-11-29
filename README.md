@@ -7,6 +7,15 @@ it is often used as the "Hello, world" of emulator development. You can read mor
 
 Chemu8 can either be built and run locally, or played on the web on [my Github Pages](gearboxfox.github.io/chemu8). The web version comes bundles with 7 different ROM files to play with.
 
+## ROM Files Included
+1. IBM Logo - A common testing ROM.
+2. Octojam Title Screen - A common animation test, the title screen for Octojam, a CHIP-8 game jam.
+3. Pong
+4. Lights Out
+5. 15 Puzzle
+6. Connect 4
+7. Tic Tac Toe
+
 ## Building
 1. Clone the repository with `git clone https://github.com/gearboxfox/chemu8.git`
 2. Install the SDL2 and SDL2_ttf with `sudo apt-get install libsdl2-dev libsdl2-ttf-dev`
