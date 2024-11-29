@@ -362,7 +362,7 @@ bool display::preloadScreen(void (*funcptr)(char*))
     SDL_Surface *text;
     SDL_Color color = {255, 255, 255};
 
-    const char *message = "Press a key to select a ROM File: \n \n 1. IBM Logo\n 2. Octojam 2nd Title Screen\n 3. Pong\n 4. Mini Lights Out";
+    const char *message = "Press a key to select a ROM File: \n \n 1. IBM Logo\n 2. Octojam 2nd Title Screen\n 3. Pong\n 4. Mini Lights Out\n 5. 15 Puzzle\n 6. Connect 4\n 7. Tic Tac Toe";
 
     text = TTF_RenderText_Blended_Wrapped(font, message, color, 0);
     if (!text) {
@@ -410,6 +410,21 @@ bool display::preloadScreen(void (*funcptr)(char*))
 
         case SDLK_4:
           funcptr("assets/roms/mini-lights-out.ch8");
+          return true;
+          break;
+
+        case SDLK_5:
+          funcptr("assets/roms/15puzzle.ch8");
+          return true;
+          break;
+
+        case SDLK_6:
+          funcptr("assets/roms/connect4.ch8");
+          return true;
+          break;
+
+        case SDLK_7:
+          funcptr("assets/roms/tictac.ch8");
           return true;
           break;
         
