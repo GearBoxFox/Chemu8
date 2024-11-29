@@ -4,6 +4,82 @@
 #include <iostream>
 #include <stdio.h>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
+static void  mainloop(
+    cpu chip, 
+    display dis,
+    bool keyboard[16],
+    bool *keyPtr)
+{
+  bool runLoop = false;
+
+  // timing for frame limiting
+  Uint64 start = SDL_GetPerformanceCounter();
+
+  for (int i = 0; i < 5; i++)
+  {
+    
+    // let the cpu run faster
+    runLoop = dis.inputLoop(
+      keyPtr,
+      chip.v,
+      chip.gfx,
+      chip.index,
+      chip.pc,
+      chip.stackPointer,
+      chip.opcode);
+
+    // std::cout << "Current keyboard state: " << std::endl;
+    // for (int i = 0; i < 16; i++)
+    // {
+    //     std::cout << std::hex << i << std::dec << " " << keyboardState[i] << std::endl;
+    // }
+
+    if (runLoop)
+    {
+      // run CPU clock cycle
+      if (chip.executeInstructionLoop(keyPtr) != 0)
+      {
+        exit(-1);
+      }
+    }
+  }
+
+  if (runLoop && chip.drawFlag)
+  {
+    dis.drawWindow(chip.gfx, chip.startX, chip.startY);
+  }
+
+
+  Uint64 end = SDL_GetPerformanceCounter();
+
+  float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+  // Cap to 1/120th of a second, roughly the frame rate of the chip-8
+  // 1.426f
+  if ((8.0f - elapsedMS) > 0)
+  {
+    SDL_Delay(floor(8.0f - elapsedMS));
+    // timer += 8.0f;
+  } else {
+    // timer += elapsedMS;
+  }
+
+  chip.updateTimers();
+
+  // // // Timers only update on a 60Hrz frequency
+  // // std::cout << "Elapsed Timer" << elapsedMS << std::endl;
+  // // std::cout << "Timer: " << timer << std::endl;
+  // if (timer > 16.666f && runLoop)
+  // {
+  //   timer = 0.0;
+  //   chip8.updateTimers();
+  // }
+}
+
 // You must include the command line parameters for your main function to be
 // recognized by SDL
 int main(int argc, char **args) {
@@ -65,64 +141,9 @@ int main(int argc, char **args) {
 
   bool keyboardState[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   bool *keyPtr = keyboardState;
-  bool runLoop = false;
 
   while (true) {
-    // timing for frame limiting
-    Uint64 start = SDL_GetPerformanceCounter();
-
-    runLoop = display.inputLoop(
-      keyPtr,
-      chip8.v,
-      chip8.gfx,
-      chip8.index,
-      chip8.pc,
-      chip8.stackPointer,
-      chip8.opcode);
-
-    // std::cout << "Current keyboard state: " << std::endl;
-    // for (int i = 0; i < 16; i++)
-    // {
-    //     std::cout << std::hex << i << std::dec << " " << keyboardState[i] << std::endl;
-    // }
-
-    if (runLoop)
-    {
-      // run CPU clock cycle
-      if (chip8.executeInstructionLoop(keyPtr) != 0)
-      {
-        exit(-1);
-      }
-
-      // draw the screen
-      if (chip8.drawFlag)
-      {
-        chip8.drawFlag = false;
-        display.drawWindow(chip8.gfx, chip8.startX, chip8.startY);
-      }
-    }
-
-    Uint64 end = SDL_GetPerformanceCounter();
-
-	  float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
-
-	  // Cap to 200 FPS, roughly the frame rate of the chip-8
-    if ((1.428f - elapsedMS) > 0)
-    {
-	    SDL_Delay(floor(1.428f - elapsedMS));
-      timer += 1.428f;
-    } else {
-      timer += elapsedMS;
-    }
-
-    // // Timers only update on a 60Hrz frequency
-    // std::cout << "Elapsed Timer" << elapsedMS << std::endl;
-    // std::cout << "Timer: " << timer << std::endl;
-    if (timer > 16.666f && runLoop)
-    {
-      timer = 0.0;
-      chip8.updateTimers();
-    }
+    mainloop(chip8, display, keyboardState, keyPtr);
   }
 
   // End the program, but should never get here

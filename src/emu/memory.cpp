@@ -46,7 +46,7 @@ void chipMemory::loadFontData()
 
     for (unsigned short adressIndex = 0; adressIndex < sizeof(font) / sizeof(unsigned char); adressIndex++)
     {
-        setAdress(0x050 + adressIndex, font[adressIndex]);
+        setAdress(adressIndex, font[adressIndex]);
     }
     
 }

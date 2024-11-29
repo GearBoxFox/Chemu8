@@ -43,7 +43,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
     pc += 2;
     // decode + execute
     // chip-8 has fairly a simple execute stage, so we can merge the two steps
-    // std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
+    std::cout << "Instruction: " << std::hex << std::setfill('0') << std::setw(2) << opcode << std::dec << std::endl;
 
     // chip-8 uses half-unsigned chars or "nibbles"
     int nibbles[4] = 
@@ -137,6 +137,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x0:
             // 0x8XY0 - Set vX to vY
             v[nibbles[1]] = v[nibbles[2]];
+            v[0xF] = 0;
             break;
         
         case 0x1:
@@ -176,13 +177,13 @@ int cpu::executeInstructionLoop(bool keyboard[16])
             result = v[nibbles[1]] - v[nibbles[2]];
             std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << " = " << result << std::endl;
 
-            if (v[nibbles[1]] < v[nibbles[2]])
+            if (v[nibbles[1]] >= v[nibbles[2]])
             {
+                v[0xF] = 1;
+                std::cout << "Didn't Borrowed" << std::endl;
+            } else {
                 v[0xF] = 0;
                 std::cout << "Borrowed" << std::endl;
-            } else {
-                v[0xF] = 1;
-                std::cout << "Didn't borrow" << std::endl;
             }
 
             v[nibbles[1]] = result % 256;
@@ -347,6 +348,25 @@ int cpu::executeInstructionLoop(bool keyboard[16])
             }
         }
 
+        // for (int yLine = 0; yLine < spriteHeight; yLine++)
+        // {
+        //     pixel = mem.getAdress(index + yLine);
+        //     for (int xLine = 0; xLine < 8; xLine++)
+        //     {
+        //         if ((pixel & (0x80 >> xLine)) != 0)
+        //         {
+        //             if (gfx[(xCoord + xLine + ((yCoord * yLine) * 64))] == 1)
+        //             {
+        //                 v[0xF] = 1;
+        //             }
+        //             gfx[(xCoord + xLine + ((yCoord * yLine) * 64))] ^= 1;
+        //         }
+        //     }
+            
+        // }
+        // drawFlag = true;
+        
+
         break;
     }
     case 0xE:
@@ -391,6 +411,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                         if (keyCopy[i] == true && keyboard[i] == false)
                         {
                             v[(opcode & 0x0F00) >> 8] = i;
+                            keyCopy[i] = false;
 							keyPress = true;
                         }
 					}
@@ -421,14 +442,19 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 v[0xF] = (index & 0xF000) >> 12;
                 break;
 
+            case 0x29:
+                // 0xFX29 - Set index to the adress of font character in vX, last nibble
+                index = v[(opcode & 0x0F00) >> 8] * 0x5;
+                break;
+
             case 0x33:
                 // 0xFX33 - splits the number at vX into three parts of a decimal number,
                 // and stores it at I, I + 1, I + 2.
                 // vX = 152, I = 100, I + 1 = 50, I + 2 = 2
-
-                mem.setAdress(index, v[(opcode & 0x0F00) >> 8] / 100);
-                mem.setAdress(index + 1, (v[(opcode & 0x0F00) >> 8] / 10) % 10);
-                mem.setAdress(index + 2, (v[(opcode & 0x0F00) >> 8] % 100) % 10);
+                mem.setAdress(index, v[nibbles[1]] / 100);
+                mem.setAdress(index + 1, (v[nibbles[1]] / 10) % 10);
+                mem.setAdress(index + 2, (v[nibbles[1]] % 100) % 10);
+                break;
                 
 
             case 0x55:
@@ -437,8 +463,12 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 // TODO add debug feature later for a toggle
                 for (int i = 0; i < nibbles[1] + 1; i++)
                 {
-                    mem.setAdress(index, v[i]);
-                    index++;
+                    // original
+                    // mem.setAdress(index, v[i]);
+                    // index++;
+
+                    // modern
+                    mem.setAdress(index + i, v[i]);
                 }
                 break;
 
@@ -448,8 +478,12 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 // TODO add debug feature later for a toggle
                 for (int i = 0; i < nibbles[1] + 1; i++)
                 {
-                    v[i] = mem.getAdress(index);
-                    index++;
+                    // original
+                    // v[i] = mem.getAdress(index);
+                    // index++;
+
+                    // modern
+                    v[i] = mem.getAdress(index + i);
                 }
                 break;
                 
