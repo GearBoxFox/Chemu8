@@ -145,9 +145,6 @@ static void  mainloop()
 // recognized by SDL
 int main(int argc, char **args) {
   float timer = 0.0;
-
-  std::cout << args[0] << " " << args[1] << " " << args[2] << " " << args[3] << std::endl;
-
   // the first argument should be the ROM file to load
   if (argc < 2) {
     preloadedRom = false;

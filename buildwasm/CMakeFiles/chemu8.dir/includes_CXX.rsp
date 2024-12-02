@@ -1,1 +1,1 @@
--I/home/rowanfoxx/Documents/github/Chemu8/buildwasm -I/home/rowanfoxx/Documents/github/Chemu8/memory -isystem /home/rowanfoxx/.emsdk/upstream/emscripten/cache/sysroot/include/SDL2
+-I/home/rowanfoxx/Documents/GitHub/Chemu8/buildwasm -I/home/rowanfoxx/Documents/GitHub/Chemu8/memory

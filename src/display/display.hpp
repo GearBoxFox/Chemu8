@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdio.h>
 
+extern bool modern;
+
 class display {
 public:
   display();

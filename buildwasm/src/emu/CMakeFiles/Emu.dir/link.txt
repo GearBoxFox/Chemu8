@@ -1,2 +1,2 @@
-/home/rowanfoxx/.emsdk/upstream/emscripten/emar qc libEmu.a CMakeFiles/Emu.dir/cpu.cpp.o CMakeFiles/Emu.dir/memory.cpp.o
-/home/rowanfoxx/.emsdk/upstream/emscripten/emranlib libEmu.a
+/home/rowanfoxx/emsdk/upstream/emscripten/emar qc libEmu.a CMakeFiles/Emu.dir/cpu.cpp.o CMakeFiles/Emu.dir/memory.cpp.o
+/home/rowanfoxx/emsdk/upstream/emscripten/emranlib libEmu.a

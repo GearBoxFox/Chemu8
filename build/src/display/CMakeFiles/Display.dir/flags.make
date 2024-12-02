@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/include/SDL2
+CXX_INCLUDES = 
 
-CXX_FLAGS =  -Wall -Wextra -std=gnu++20
+CXX_FLAGS =  -Wall -Wextra -g -std=gnu++20
 

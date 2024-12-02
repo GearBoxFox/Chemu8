@@ -175,18 +175,8 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
-            // std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << " = " << result << std::endl;
-
-            if (v[nibbles[1]] >= v[nibbles[2]])
-            {
-                v[0xF] = 1;
-                // std::cout << "Didn't Borrowed" << std::endl;
-            } else {
-                v[0xF] = 0;
-                // std::cout << "Borrowed" << std::endl;
-            }
-
-            v[nibbles[1]] = result % 256;
+            v[0xF] = v[nibbles[1]] >= v[nibbles[2]];
+            v[nibbles[1]] = result  % 256;
             break;
         break;
 
@@ -215,19 +205,8 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x7:
             // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
             result = v[nibbles[2]] - v[nibbles[1]];
-            // std::cout << "Subtracting " << +v[nibbles[2]] << " - " << +v[nibbles[1]] << " = " << result << std::endl;
-
-
-            if (v[nibbles[2]] < v[nibbles[1]])
-            {
-                v[0xF] = 0;
-                // std::cout << "Borrowed" << std::endl;
-            } else {
-                v[0xF] = 1;
-                // std::cout << "Didn't borrow" << std::endl;
-            }
-
-            v[nibbles[1]] = result % 256;
+            v[0xF] = v[nibbles[2]] >= v[nibbles[1]];
+            v[nibbles[1]] = result  % 256;
             break;
 
         case 0xE:
@@ -286,7 +265,7 @@ int cpu::executeInstructionLoop(bool keyboard[16])
 
     case 0xC:
         // 0xCXNN - Put a random number from 0 - NN into vX
-        v[nibbles[1]] = rand() && (nibbles[2] << 4 | nibbles[3]);
+        v[nibbles[1]] = (rand() % 0xFF) && (nibbles[2] << 4 | nibbles[3]);
         break;
 
     case 0xD:
@@ -297,74 +276,103 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         // VX - register that holds the X coord
         // VY - register that holds the Y coord
 
-        int xCoord = v[nibbles[1]]; // modulo 64 because the screen is oly 64 pixel long
-        int yCoord = v[nibbles[2]]; // modulo 32 because the screen is oly 32 pixel tall
+        // int xCoord = v[nibbles[1]]; // modulo 64 because the screen is oly 64 pixel long
+        // int yCoord = v[nibbles[2]]; // modulo 32 because the screen is oly 32 pixel tall
 
-        startX = xCoord;
-        startY = yCoord;
+        // startX = xCoord;
+        // startY = yCoord;
 
-        int spriteHeight = nibbles[3];
+        // int spriteHeight = nibbles[3];
+        // unsigned short pixel;
+
+        // // std::cout << "X, Y: " << 
+        // // std::hex << xCoord <<
+        // // std::dec <<  ", " <<
+        // // std::hex << yCoord << 
+        // // std::dec << std::endl;
+
+        // // std::cout << "Sprite height: " << spriteHeight << std::endl;
+
+        // // draw top->bottom
+        // v[0xF] = 0;
+        // for (int y = 0; y < spriteHeight; y++)
+        // {
+        //     // get the row for the sprite
+        //     unsigned char row = mem.getAdress(index + y);
+        //     // std::cout << "Pixel row: " << +row << std::endl;
+        //     // draw left->right, each sprite is 8 bits long
+        //     for(int x = 7; x >= 0; x--)
+        //     {
+        //         // mask out the specific pixel
+        //         bool pixel = row & (0x01 << x);
+
+        //         int xIndex = (xCoord + (7 - x));
+        //         int yIndex = (yCoord + y);
+                
+        //         if (modern)
+        //         {
+        //             xIndex = xIndex % 64;
+        //             yIndex = yIndex % 32;
+        //         } else {
+        //         // error if drawing off screen
+        //             if (xIndex >= 64) 
+        //             {
+        //                 // std::cout << "Breaking from x overflow" << std::endl;
+        //                 break;
+        //             }
+
+        //             if (yIndex >= 32) 
+        //             {
+        //                 // std::cout << "Breaking from y overflow" << std::endl;
+        //                 break;
+        //             }
+        //         }
+
+        //         // the gfx array storing pixels is a 1D array
+        //         int rawIndex = xIndex + (yIndex * 64);
+        //         bool currentPixel = gfx[rawIndex];
+
+        //         // std::cout << "Drawing pixel at (" << xIndex << ", " << yIndex << "). Raw: " << rawIndex << std::endl;
+        //         // std::cout << "Current pixel: " << currentPixel << ". New pixel: " << pixel << std::endl;
+
+        //         // the pixels are drawn by xoring 
+        //         if (pixel) {
+        //             // std::cout << "Pixel drawn!" << std::endl;
+        //             if (currentPixel)
+        //             {
+        //                 v[0xF] = 1;
+        //             }
+
+        //             gfx[rawIndex] = !gfx[rawIndex];
+        //             drawFlag = true;
+        //         }
+        //     }
+        // }
+        // break;
+
+        // alternate attempt
+        unsigned short x = v[nibbles[1]];
+        unsigned short y = v[nibbles[2]];
+        unsigned short height = nibbles[3];
         unsigned short pixel;
 
-        // std::cout << "X, Y: " << 
-        // std::hex << xCoord <<
-        // std::dec <<  ", " <<
-        // std::hex << yCoord << 
-        // std::dec << std::endl;
-
-        // std::cout << "Sprite height: " << spriteHeight << std::endl;
-
-        // draw top->bottom
         v[0xF] = 0;
-        for (int y = 0; y < spriteHeight; y++)
+        for (int yline = 0; yline < height; yline++)
         {
-            // get the row for the sprite
-            unsigned char row = mem.getAdress(index + y);
-            // std::cout << "Pixel row: " << +row << std::endl;
-            // draw left->right, each sprite is 8 bits long
-            for(int x = 7; x >= 0; x--)
+            pixel = mem.getAdress(index + yline);
+            for (int xline = 0; xline < 8; xline++)
             {
-                // mask out the specific pixel
-                bool pixel = row & (0x01 << x);
-
-                int xIndex = (xCoord + (7 - x));
-                int yIndex = (yCoord + y);
-                
-                if (modern)
+                if ((pixel & (0x80 >> xline)) != 0)
                 {
-                    xIndex = xIndex % 64;
-                    yIndex = yIndex % 32;
-                } else {
-                // error if drawing off screen
-                    if (xIndex >= 64) 
+                    if(gfx[(x + xline + ((y + yline) * 64))] == 1)
                     {
-                        // std::cout << "Breaking from x overflow" << std::endl;
-                        break;
+                        v[0xF] = 1;                                    
                     }
-
-                    if (yIndex >= 32) 
-                    {
-                        // std::cout << "Breaking from y overflow" << std::endl;
-                        break;
-                    }
-                }
-
-                // the gfx array storing pixels is a 1D array
-                int rawIndex = xIndex + (yIndex * 64);
-                bool currentPixel = gfx[rawIndex];
-
-                // std::cout << "Drawing pixel at (" << xIndex << ", " << yIndex << "). Raw: " << rawIndex << std::endl;
-                // std::cout << "Current pixel: " << currentPixel << ". New pixel: " << pixel << std::endl;
-
-                // the pixels are drawn by xoring 
-                if (pixel) {
-                    // std::cout << "Pixel drawn!" << std::endl;
-                    gfx[rawIndex] = !gfx[rawIndex];
-                    v[0xF] = 1;
-                    drawFlag = true;
+                    gfx[x + xline + ((y + yline) * 64)] ^= 1;
                 }
             }
         }
+
         break;
     }
     case 0xE:
