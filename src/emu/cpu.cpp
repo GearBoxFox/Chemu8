@@ -175,34 +175,33 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x5:
             // 0x8XY5 - vX is set to vX - vY. Carry is set to vX > vY
             result = v[nibbles[1]] - v[nibbles[2]];
-            std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << " = " << result << std::endl;
+            // std::cout << "Subtracting " << +v[nibbles[1]] << " - " << +v[nibbles[2]] << " = " << result << std::endl;
 
             if (v[nibbles[1]] >= v[nibbles[2]])
             {
                 v[0xF] = 1;
-                std::cout << "Didn't Borrowed" << std::endl;
+                // std::cout << "Didn't Borrowed" << std::endl;
             } else {
                 v[0xF] = 0;
-                std::cout << "Borrowed" << std::endl;
+                // std::cout << "Borrowed" << std::endl;
             }
 
             v[nibbles[1]] = result % 256;
             break;
-
-            // if(v[(opcode & 0x00F0) >> 4] > v[(opcode & 0x0F00) >> 8]) 
-            //     v[0xF] = 0; // there is a borrow
-            // else 
-            //     v[0xF] = 1;					
-            // v[(opcode & 0x0F00) >> 8] -= v[(opcode & 0x00F0) >> 4];
         break;
 
         case 0x6:
             // 0x8XY6 - vX is set to vY >> 1. RIGHT shift
-            testValue = v[nibbles[1]];
-            v[nibbles[1]] = v[nibbles[2]] >> 1;
-
-            // TODO make toggle for modern versions
-            // modern chip-8 sets vX to vX >> 1
+            testValue = 0;
+            if (modern)
+            {
+                // modern chip-8 sets vX to vX >> 1
+                testValue = v[nibbles[1]];
+                v[nibbles[1]] = v[nibbles[1]] >> 1;
+            } else {
+                testValue = v[nibbles[2]];
+                v[nibbles[1]] = v[nibbles[2]] >> 1;
+            }
 
             // vF is set to the bit that was shifted out
             if (testValue & 0x1 != 0)
@@ -216,16 +215,16 @@ int cpu::executeInstructionLoop(bool keyboard[16])
         case 0x7:
             // 0x8XY5 - vX is set to vY - vX. Carry is set to vY > vX
             result = v[nibbles[2]] - v[nibbles[1]];
-            std::cout << "Subtracting " << +v[nibbles[2]] << " - " << +v[nibbles[1]] << " = " << result << std::endl;
+            // std::cout << "Subtracting " << +v[nibbles[2]] << " - " << +v[nibbles[1]] << " = " << result << std::endl;
 
 
             if (v[nibbles[2]] < v[nibbles[1]])
             {
                 v[0xF] = 0;
-                std::cout << "Borrowed" << std::endl;
+                // std::cout << "Borrowed" << std::endl;
             } else {
                 v[0xF] = 1;
-                std::cout << "Didn't borrow" << std::endl;
+                // std::cout << "Didn't borrow" << std::endl;
             }
 
             v[nibbles[1]] = result % 256;
@@ -233,14 +232,20 @@ int cpu::executeInstructionLoop(bool keyboard[16])
 
         case 0xE:
             // 0x8XY6 - vX is set to vY << 1. LEFT shift
-            testValue = v[nibbles[1]];
+            
             // vF is set to the bit that was shifted out
-            testValue = v[nibbles[1]] >> 7;
-            v[nibbles[1]] = v[nibbles[2]] << 1;
-            v[0xF] = testValue;
+            testValue = 0;
+            if (modern)
+            {
+                // modern chip-8 sets vX to vX << 1
+                testValue = v[nibbles[1]];
+                v[nibbles[1]] = v[nibbles[1]] << 1;    
+            } else {
+                testValue = v[nibbles[2]];
+                v[nibbles[1]] = v[nibbles[2]] << 1;
+            }
 
-            // TODO make toggle for modern versions
-            // modern chip-8 sets vX to vX << 1
+            v[0xF] = testValue >> 7;
             break;
 
         default:
@@ -267,14 +272,21 @@ int cpu::executeInstructionLoop(bool keyboard[16])
     case 0xB:
         // 0xBNNN - Jump to adress v0 + NNN
         // Modern chip-8 is 0xBXNNN, jump to adress vX + NN
-        index = v[0x0] + nibbles[1] << 8
+        if (modern)
+        {
+            index = v[nibbles[1]] + nibbles[1] << 8
             | nibbles[2] << 4
             | nibbles[3];
+        } else {
+            index = v[0x0] + nibbles[1] << 8
+            | nibbles[2] << 4
+            | nibbles[3];
+        }
         break;
 
     case 0xC:
         // 0xCXNN - Put a random number from 0 - NN into vX
-        v[nibbles[1]] = rand() % (nibbles[2] << 4 | nibbles[3]) + 1;
+        v[nibbles[1]] = rand() && (nibbles[2] << 4 | nibbles[3]);
         break;
 
     case 0xD:
@@ -315,20 +327,26 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 // mask out the specific pixel
                 bool pixel = row & (0x01 << x);
 
-                // error if drawing off screen
                 int xIndex = (xCoord + (7 - x));
-                if (xIndex >= 64) 
-                {
-                    // std::cout << "Breaking from x overflow" << std::endl;
-                    break;
-                }
-
-                // error if drawing off screen
                 int yIndex = (yCoord + y);
-                if (yIndex >= 32) 
+                
+                if (modern)
                 {
-                    // std::cout << "Breaking from y overflow" << std::endl;
-                    break;
+                    xIndex = xIndex % 64;
+                    yIndex = yIndex % 32;
+                } else {
+                // error if drawing off screen
+                    if (xIndex >= 64) 
+                    {
+                        // std::cout << "Breaking from x overflow" << std::endl;
+                        break;
+                    }
+
+                    if (yIndex >= 32) 
+                    {
+                        // std::cout << "Breaking from y overflow" << std::endl;
+                        break;
+                    }
                 }
 
                 // the gfx array storing pixels is a 1D array
@@ -347,26 +365,6 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 }
             }
         }
-
-        // for (int yLine = 0; yLine < spriteHeight; yLine++)
-        // {
-        //     pixel = mem.getAdress(index + yLine);
-        //     for (int xLine = 0; xLine < 8; xLine++)
-        //     {
-        //         if ((pixel & (0x80 >> xLine)) != 0)
-        //         {
-        //             if (gfx[(xCoord + xLine + ((yCoord * yLine) * 64))] == 1)
-        //             {
-        //                 v[0xF] = 1;
-        //             }
-        //             gfx[(xCoord + xLine + ((yCoord * yLine) * 64))] ^= 1;
-        //         }
-        //     }
-            
-        // }
-        // drawFlag = true;
-        
-
         break;
     }
     case 0xE:
@@ -426,13 +424,13 @@ int cpu::executeInstructionLoop(bool keyboard[16])
             
             case 0x15:
                 // 0xFX15 - Set delay timer to vX
-                std::cout << "Setting Delay Timer" << std::endl;
+                // std::cout << "Setting Delay Timer" << std::endl;
                 delay_timer = v[nibbles[1]];
                 break;
 
             case 0x18:
                 // 0xFX18 - Set sound timer to vX
-                std::cout << "Setting Sound Timer" << std::endl;
+                // std::cout << "Setting Sound Timer" << std::endl;
                 sound_timer = v[nibbles[1]];
                 break;
             
@@ -464,11 +462,13 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 for (int i = 0; i < nibbles[1] + 1; i++)
                 {
                     // original
-                    // mem.setAdress(index, v[i]);
-                    // index++;
-
-                    // modern
-                    mem.setAdress(index + i, v[i]);
+                    if (modern)
+                    {
+                        mem.setAdress(index + i, v[i]);
+                    } else {
+                        mem.setAdress(index, v[i]);
+                        index++;
+                    }
                 }
                 break;
 
@@ -478,12 +478,15 @@ int cpu::executeInstructionLoop(bool keyboard[16])
                 // TODO add debug feature later for a toggle
                 for (int i = 0; i < nibbles[1] + 1; i++)
                 {
-                    // original
-                    // v[i] = mem.getAdress(index);
-                    // index++;
-
-                    // modern
-                    v[i] = mem.getAdress(index + i);
+                    if (modern)
+                    {
+                        // modern
+                        v[i] = mem.getAdress(index + i);
+                    } else {
+                        // original
+                        v[i] = mem.getAdress(index);
+                        index++;
+                    }
                 }
                 break;
                 

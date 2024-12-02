@@ -14,6 +14,8 @@ display display;
 
 FILE *rom;
 
+bool modern = false;
+
 bool keyboardState[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 bool *keyPtr = keyboardState;
 bool preloadedRom = false;
@@ -144,6 +146,8 @@ static void  mainloop()
 int main(int argc, char **args) {
   float timer = 0.0;
 
+  std::cout << args[0] << " " << args[1] << " " << args[2] << " " << args[3] << std::endl;
+
   // the first argument should be the ROM file to load
   if (argc < 2) {
     preloadedRom = false;
@@ -156,6 +160,9 @@ int main(int argc, char **args) {
 
   bool debug = (args[2] != NULL);
   display.setDebug(false);
+
+  modern = (args[3] != NULL);
+  std::cout << modern << std::endl;
 
   #ifdef __EMSCRIPTEN__
   emscripten_set_main_loop(mainloop, 0, 1);

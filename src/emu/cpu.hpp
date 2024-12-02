@@ -14,6 +14,9 @@
 #define THIRDNIBBLE(x)  (x & 0x00F0) >> 4
 #define FOURTHNIBBLE(x) (x & 0x000F)
 
+// do we use modern opcodes?
+extern bool modern;
+
 // SDLs Uint8 typedef
 typedef uint8_t Uint8;
 
